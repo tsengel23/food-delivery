@@ -1,5 +1,5 @@
 import { Footer } from "./_components/Footer";
-import { Navigation } from "./_components/Navigation";
+import { Navigation } from "./_components/navigation/Navigation";
 
 export default function RootLayout({
   children,
