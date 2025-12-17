@@ -1,12 +1,12 @@
 "use client";
 import { Dispatch, SetStateAction, useState, createContext } from "react";
 
-import { LoginStep } from "../_components/auth/LoginStep";
-import { CreateYourAccount } from "../_components/auth/CreateYourAccount";
-import { CreateStrongPassword } from "../_components/auth/CreateStrongPassword";
-import { ResetPassword } from "../_components/auth/ResetPassword";
-import { VerifyEmail } from "../_components/auth/VerifyEmail";
-import { CreateNewPassword } from "../_components/auth/CreateNewPassword";
+import { LoginStep } from "../(public)/_components/auth/LoginStep";
+import { CreateYourAccount } from "../(public)/_components/auth/CreateYourAccount";
+import { CreateStrongPassword } from "../(public)/_components/auth/CreateStrongPassword";
+import { ResetPassword } from "../(public)/_components/auth/ResetPassword";
+import { VerifyEmail } from "../(public)/_components/auth/VerifyEmail";
+import { CreateNewPassword } from "../(public)/_components/auth/CreateNewPassword";
 
 type StepContextType = {
   setStep: Dispatch<SetStateAction<number>>;
