@@ -46,7 +46,7 @@ export const Order = () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="cart">
-            <div></div>
+            <div> </div>
           </TabsContent>
           <TabsContent value="order"></TabsContent>
         </Tabs>

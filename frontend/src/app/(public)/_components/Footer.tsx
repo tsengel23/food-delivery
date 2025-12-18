@@ -1,30 +1,59 @@
 import Link from "next/link";
+import { Flow } from "./Flow";
 
 export const Footer = () => {
   return (
     <div className="w-full bg-[#18181B] flex flex-col   border-red-500">
-      <div className="w-full py-7 pl-[98px] bg-[#EF4444] mt-15 flex gap-[34px] whitespace-nowrap overflow-hidden">
-        <p className="font-semibold text-[#FAFAFA] text-3xl">
+      <div className="w-full py-7 pl-[98px] bg-[#EF4444] mt-15 whitespace-nowrap overflow-hidden animate-flow flex gap-[34]">
+        {/* <Flow
+          text="Fresh fast delivered"
+          speed={120}
+          direction="left"
+          repeat={14}
+        /> */}
+
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
           Fresh fast delivered
-        </p>
-        <p className="font-semibold text-[#FAFAFA] text-3xl">
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
           Fresh fast delivered
-        </p>
-        <p className="font-semibold text-[#FAFAFA] text-3xl">
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
           Fresh fast delivered
-        </p>
-        <p className="font-semibold text-[#FAFAFA] text-3xl">
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
           Fresh fast delivered
-        </p>
-        <p className="font-semibold text-[#FAFAFA] text-3xl">
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
           Fresh fast delivered
-        </p>
-        <p className="font-semibold text-[#FAFAFA] text-3xl">
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
           Fresh fast delivered
-        </p>
-        <p className="font-semibold text-[#FAFAFA] text-3xl">
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
           Fresh fast delivered
-        </p>
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
+          Fresh fast delivered
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
+          Fresh fast delivered
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
+          Fresh fast delivered
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
+          Fresh fast delivered
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
+          Fresh fast delivered
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
+          Fresh fast delivered
+        </span>
+        <span className="font-semibold text-[#FAFAFA] text-3xl">
+          Fresh fast delivered
+        </span>
       </div>
       <div className="relative mx-22 mt-[76] mb-[104]  border-blue-400 flex justify-between">
         <div className="absolute left-0 top-0">

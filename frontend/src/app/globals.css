@@ -126,3 +126,24 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes flow-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes flow-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* .animate-flow {
+  animation: flow 120s linear infinite;
+} */

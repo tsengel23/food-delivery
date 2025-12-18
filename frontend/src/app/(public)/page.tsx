@@ -1,6 +1,7 @@
 "use client";
 
 import { FoodSection } from "./_components/FoodSection";
+import { SelectedFoodCard } from "./_components/SelectedFoodCard";
 
 export default function Home() {
   return (
@@ -8,9 +9,11 @@ export default function Home() {
       <div className="mb-22">
         <img src="/hero.png" />
       </div>
+
+      {/* <SelectedFoodCard image={""} title={""} overview="" price=  /> */}
+      {/* <FoodSection />
       <FoodSection />
-      <FoodSection />
-      <FoodSection />
+      <FoodSection /> */}
     </div>
   );
 }
