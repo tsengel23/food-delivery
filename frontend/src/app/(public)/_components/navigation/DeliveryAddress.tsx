@@ -50,7 +50,7 @@ export const DeliveryAddress = () => {
             // ---> Хэрэглэгч бичих, устгах, paste хийх бүрт ажиллана,бичих болгонд барьсан textarea-гаа шалгах
             // ----->Ингэж "textarea" автоматаар өсдөг
             placeholder="Please share your complete address"
-            className=" w-full resize-none min-w-0 break-all  overflow-hidden min-h-[64px]"
+            className=" w-full resize-none min-w-0 break-all  overflow-hidden min-h-16"
           />
           <DialogClose className="absolute top-0 right-0">
             <div className="w-10 h-10  rounded-full bg-[#F4F4F5] flex justify-center items-center hover:bg-gray-300">

@@ -16,18 +16,20 @@ import { AfterLogin } from "./AfterLogin";
 import { BeforeLogin } from "./BeforeLogin";
 
 export const Navigation = () => {
-  const hasUser = true;
+  const user = false;
   return (
-    <Link href="/">
-      <div className="w-full bg-[#18181B] py-3 fixed z-10">
-        <div className="flex justify-between mx-22">
+    <div className="w-full bg-[#18181B] py-3 fixed z-10">
+      <div className="flex justify-between mx-22">
+        <Link href="/">
           <div>
             <img src="/logo1.png" />
           </div>
-          {/* <BeforeLogin /> */}
-          <AfterLogin />
-        </div>
+        </Link>
+
+        {/* {user ? <AfterLogin /> : <BeforeLogin />} */}
+        {/* <BeforeLogin /> */}
+        <AfterLogin />
       </div>
-    </Link>
+    </div>
   );
 };
