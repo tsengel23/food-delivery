@@ -20,12 +20,10 @@ import { StepContext } from "@/app/Login/page";
 import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { FormFooter } from "./FormFooter";
+import { motion } from "framer-motion";
 
 const formSchema = z.object({
   email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
 });
@@ -36,50 +34,82 @@ export const ResetPassword = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("hi");
+
     console.log(values);
-    setStep(2);
+    setStep(3);
   }
   return (
-    <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
-      <Button variant={"outline"} className="w-9 h-9 ">
-        <ChevronLeftIcon />
-      </Button>
-      <FormHeader
-        title={"Reset your password "}
-        text={"Enter your email to receive a password reset link."}
-      />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="flex flex-col gap-4  border-green-400">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="example@gamil.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      exit={{
+        opacity: 0,
+        y: -20,
+      }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
+      style={{
+        // position: "absolute",
+        width: "70%",
+      }}
+    >
+      <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
+        <Button
+          onClick={() => setStep(1)}
+          variant={"outline"}
+          className="w-9 h-9 "
+        >
+          <ChevronLeftIcon />
+        </Button>
+        <FormHeader
+          title={"Reset your password "}
+          text={"Enter your email to receive a password reset link."}
+        />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="flex flex-col gap-4  border-green-400">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder="example@gamil.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            {/* <div onClick={() => setStep(2)}>Forgot password?</div> */}
+            <Button
+              variant={"default"}
+              type="submit"
+              className="w-full font-medium text-sm"
+            >
+              Send link
+            </Button>
+            <FormFooter
+              text={"Don’t have an account?"}
+              step={"Sign up "}
+              href={"/SignUp"}
             />
-          </div>
-          {/* <div onClick={() => setStep(2)}>Forgot password?</div> */}
-          <Button
-            variant={"default"}
-            type="submit"
-            className="w-full font-medium text-sm"
-          >
-            Send link
-          </Button>
-          <FormFooter text={"Don’t have an account?"} step={"Sign up "} />
-        </form>
-      </Form>
-    </div>
+          </form>
+        </Form>
+      </div>
+    </motion.div>
   );
 };

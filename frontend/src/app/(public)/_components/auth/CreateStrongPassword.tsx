@@ -21,6 +21,7 @@ import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormFooter } from "./FormFooter";
+import { motion } from "framer-motion";
 
 const formSchema = z.object({
   password: z.string().min(2, {
@@ -46,57 +47,84 @@ export const CreateStrongPassword = () => {
     setStep(2);
   }
   return (
-    <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
-      <Button variant={"outline"} className="w-9 h-9 ">
-        <ChevronLeftIcon />
-      </Button>
-      <FormHeader
-        title={"Create a strong password"}
-        text={"Create a strong password with letters, numbers."}
-      />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="flex flex-col gap-4  border-green-400">
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Password" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      exit={{
+        opacity: 0,
+        y: -20,
+      }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
+      style={{
+        // position: "absolute",
+        width: "70%",
+      }}
+    >
+      <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
+        <Button variant={"outline"} className="w-9 h-9 ">
+          <ChevronLeftIcon />
+        </Button>
+        <FormHeader
+          title={"Create a strong password"}
+          text={"Create a strong password with letters, numbers."}
+        />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <div className="flex flex-col gap-4  border-green-400">
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder="Password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="passwordConfirm"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Confirm" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="text-[#71717A] text-sm font-normal flex justify-start h-5 gap-2 ">
-              <Checkbox /> Show password
+              <FormField
+                control={form.control}
+                name="passwordConfirm"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input placeholder="Confirm" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="text-[#71717A] text-sm font-normal flex justify-start h-5 gap-2 ">
+                <Checkbox /> Show password
+              </div>
             </div>
-          </div>
-          {/* <div onClick={() => setStep(2)}>Forgot password?</div> */}
-          <Button
-            variant={"default"}
-            type="submit"
-            className="w-full font-medium text-sm"
-          >
-            Let's Go
-          </Button>
-          <FormFooter text={"Already have an account?"} step={"Log in"} />
-        </form>
-      </Form>
-    </div>
+            {/* <div onClick={() => setStep(2)}>Forgot password?</div> */}
+            <Button
+              variant={"default"}
+              type="submit"
+              className="w-full font-medium text-sm"
+            >
+              Let's Go
+            </Button>
+            <FormFooter
+              text={"Already have an account?"}
+              step={"Log in"}
+              href={"/Login"}
+            />
+          </form>
+        </Form>
+      </div>
+    </motion.div>
   );
 };

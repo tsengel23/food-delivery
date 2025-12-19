@@ -7,7 +7,7 @@
 //     </div>
 //   );
 // };
-
+"use client";
 import Link from "next/link";
 import { DeliveryAddress } from "./DeliveryAddress";
 import { Order } from "./Order";
@@ -26,9 +26,9 @@ export const Navigation = () => {
           </div>
         </Link>
 
-        {/* {user ? <AfterLogin /> : <BeforeLogin />} */}
-        {/* <BeforeLogin /> */}
-        <AfterLogin />
+        {user ? <AfterLogin /> : <BeforeLogin />}
+        {/* <BeforeLogin />
+        <AfterLogin /> */}
       </div>
     </div>
   );
