@@ -23,6 +23,7 @@ type FoodCard = {
 };
 
 export const FoodCard = ({ image, title, overview, price }: FoodCard) => {
+  const [count, setCount] = useState(1);
   const [selected, setSelected] = useState(false);
   return (
     <div className="relative">
@@ -34,18 +35,6 @@ export const FoodCard = ({ image, title, overview, price }: FoodCard) => {
                 className="absolute inset-0 w-full h-full object-cover rounded-xl"
                 src={image}
               />
-              {/* <Button
-              onClick={() => setSelected(!selected)}
-              type="button"
-              className={`w-11 h-11  rounded-full absolute right-5 bottom-5 
-            ${selected ? "bg-black" : "bg-white"}`}
-            >
-              {selected ? (
-                <Check className="text-white" />
-              ) : (
-                <Plus className="text-[#EF4444]" />
-              )}
-            </Button> */}
             </div>
             <div>
               <div className="flex justify-between">
@@ -90,17 +79,28 @@ export const FoodCard = ({ image, title, overview, price }: FoodCard) => {
                   </div>
                   <div className="flex gap-3 items-center">
                     <Button
+                      disabled={count === 1}
+                      onClick={() => setCount((prev) => Math.max(1, prev - 1))}
+                      // onClick={() => {
+                      //   if (count > 1) {
+                      //     setCount(count - 1);
+                      //   }
+                      // }}
+                      type="button"
                       variant={"outline"}
-                      className="w-11 h-11 rounded-full border border-gray-400 flex justify-center items-center"
+                      className="w-11 h-11 rounded-full border border-gray-400 flex justify-center items-center p-1"
                     >
                       <Minus className="w-4 h-4 " />
                     </Button>
                     <span className="text-[#09090B] text-lg font-semibold">
-                      1
+                      {count}
                     </span>
                     <Button
+                      onClick={() => setCount((prev) => prev + 1)}
+                      // onClick={() => setCount(count + 1)}
+                      type="button"
                       variant={"outline"}
-                      className="w-11 h-11 rounded-full border border-gray-400 flex justify-center items-center"
+                      className="w-11 h-11 rounded-full border border-gray-400 flex justify-center items-center p-1"
                     >
                       <Plus className="w-4 h-4 " />
                     </Button>

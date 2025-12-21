@@ -10,6 +10,7 @@ import { CreateNewPassword } from "../(public)/_components/auth/CreateNewPasswor
 import { AnimatePresence, motion } from "framer-motion";
 
 type StepContextType = {
+  step: number;
   setStep: Dispatch<SetStateAction<number>>;
 };
 
@@ -19,7 +20,7 @@ export const StepContext = createContext<StepContextType>(
 export default function Login() {
   const [step, setStep] = useState<number>(1);
   return (
-    <StepContext.Provider value={{ setStep }}>
+    <StepContext.Provider value={{ step, setStep }}>
       <AnimatePresence>
         <div className="w-screen h-screen pl-25 p-5 border-2 border-red-500 flex gap-12 ">
           <div className="flex items-center">

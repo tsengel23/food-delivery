@@ -24,12 +24,29 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  email: z
+    .string()
+    .min(5, {
+      message: "Email must be at least 5 characters.",
+    })
+    .max(50, {
+      message: "Email is too long characters",
+    })
+    .toLowerCase()
+    .email("Need correct Email address"),
+  password: z
+    .string()
+    .min(8, {
+      message: "Password must be at least 8 characters.",
+    })
+    .max(25, {
+      message: "Password is too heavy",
+    })
+    .regex(/[a-z]/, "Contains at least 1 lowercase letter ")
+    .regex(/[A-Z]/, "Contains at least 1 uppercase letter")
+    .regex(/[0-9]/, "Contains at least 1 number")
+    .regex(/[!@#$%^&*]/, "Contains at least 1 special character")
+    .refine((val) => !val.includes("123"), "It is a too simple way"),
 });
 
 export const LoginStep = () => {
@@ -45,7 +62,7 @@ export const LoginStep = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    router.push("/");
+    router.replace("/");
   }
   return (
     <motion.div
@@ -71,7 +88,12 @@ export const LoginStep = () => {
       }}
     >
       <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
-        <Button variant={"outline"} className="w-9 h-9 ">
+        <Button
+          // onClick={() => router.push("/SignUp")}
+          type="button"
+          variant={"outline"}
+          className="w-9 h-9 "
+        >
           <ChevronLeftIcon />
         </Button>
         <FormHeader

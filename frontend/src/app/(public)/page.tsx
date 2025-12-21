@@ -11,9 +11,9 @@ export default function Home() {
       </div>
 
       {/* <SelectedFoodCard image={""} title={""} overview="" price=  /> */}
-      {/* <FoodSection />
       <FoodSection />
-      <FoodSection /> */}
+      <FoodSection />
+      <FoodSection />
     </div>
   );
 }

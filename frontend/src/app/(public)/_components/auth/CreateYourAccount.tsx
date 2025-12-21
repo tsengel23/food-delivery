@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { toLowerCase, z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -16,28 +16,33 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useContext } from "react";
-import { StepContext } from "@/app/Login/page";
+import { StepContext } from "@/app/SignUp/page";
 import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  password: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  email: z
+    .string()
+    .min(5, {
+      message: "Email must be at least 5 characters.",
+    })
+    .max(50, {
+      message: "Email is too long characters",
+    })
+    .toLowerCase()
+    .email("Need correct Email address"),
 });
 
 export const CreateYourAccount = () => {
+  const router = useRouter();
   const { setStep } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
@@ -70,7 +75,8 @@ export const CreateYourAccount = () => {
     >
       <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
         <Button
-          onClick={() => setStep(1)}
+          // onClick={() => router.push("/Login")}
+          type="button"
           variant={"outline"}
           className="w-9 h-9"
         >

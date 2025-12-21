@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { boolean, z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,24 +15,40 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useContext } from "react";
-import { StepContext } from "@/app/Login/page";
+import { useContext, useState } from "react";
+import { StepContext } from "@/app/SignUp/page";
 import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
-const formSchema = z.object({
-  password: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  passwordConfirm: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
+const formSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, {
+        message: "Password must be at least 8 characters.",
+      })
+      .max(25, {
+        message: "Password is too heavy",
+      })
+      .regex(/[a-z]/, "Contains at least 1 lowercase letter")
+      .regex(/[A-Z]/, "Contains at least 1 uppercase letter")
+      .regex(/[0-9]/, "Contains at least 1 number")
+      .regex(/[!@##$%^&*]/, "Contains at least 1 special character")
+      .refine((val) => !val.includes("123"), "It is a too simple way"),
+    passwordConfirm: z.string().min(8),
+  })
+  .refine((values) => values.password === values.passwordConfirm, {
+    message: "Password is not matching",
+    path: ["passwordConfirm"],
+  });
 
 export const CreateStrongPassword = () => {
+  const [showPass, setShowPass] = useState<boolean>(false);
+  const router = useRouter();
   const { setStep } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,7 +60,7 @@ export const CreateStrongPassword = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    setStep(2);
+    router.replace("/Login");
   }
   return (
     <motion.div
@@ -70,7 +86,12 @@ export const CreateStrongPassword = () => {
       }}
     >
       <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
-        <Button variant={"outline"} className="w-9 h-9 ">
+        <Button
+          onClick={() => setStep(1)}
+          type="button"
+          variant={"outline"}
+          className="w-9 h-9 "
+        >
           <ChevronLeftIcon />
         </Button>
         <FormHeader
@@ -86,7 +107,11 @@ export const CreateStrongPassword = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Password" {...field} />
+                      <Input
+                        type={showPass ? "text" : "password"}
+                        placeholder="Password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -99,14 +124,22 @@ export const CreateStrongPassword = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Confirm" {...field} />
+                      <Input
+                        type={showPass ? "text" : "password"}
+                        placeholder="Confirm"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <div className="text-[#71717A] text-sm font-normal flex justify-start h-5 gap-2 ">
-                <Checkbox /> Show password
+                <Checkbox
+                  checked={showPass}
+                  onCheckedChange={(checked) => setShowPass(Boolean(checked))}
+                />{" "}
+                Show password
               </div>
             </div>
             {/* <div onClick={() => setStep(2)}>Forgot password?</div> */}

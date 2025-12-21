@@ -15,27 +15,44 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StepContext } from "@/app/Login/page";
 import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
 
-const formSchema = z.object({
-  password: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  passwordConfirm: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
+const formSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, {
+        message: "Password must be at least 8 characters.",
+      })
+      .max(25, {
+        message: "Password is too heavy",
+      })
+      .regex(/[a-z]/, "Contains at least 1 lowercase letter ")
+      .regex(/[A-Z]/, "Contains at least 1 uppercase letter")
+      .regex(/[0-9]/, "Contains at least 1 number")
+      .regex(/[!@#$%^&*]/, "Contains at least 1 special character")
+      .refine((val) => !val.includes("123"), "It is a too simple way"),
+    passwordConfirm: z.string().min(8),
+  })
+  .refine((values) => values.password === values.passwordConfirm, {
+    message: "Password is not matching",
+    path: ["passwordConfirm"],
+  });
 
 export const CreateNewPassword = () => {
   const { setStep } = useContext(StepContext);
+  const [seePass1, setSeePass1] = useState<boolean>(true);
+  const [seePass2, setSeePass2] = useState<boolean>(true);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    //
+    mode: "onChange",
+    //
     defaultValues: {
       password: "",
       passwordConfirm: "",
@@ -44,7 +61,7 @@ export const CreateNewPassword = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    setStep(4);
+    setStep(1);
   }
   return (
     <motion.div
@@ -72,6 +89,7 @@ export const CreateNewPassword = () => {
       <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
         <Button
           onClick={() => setStep(3)}
+          type="button"
           variant={"outline"}
           className="w-9 h-9 "
         >
@@ -92,7 +110,11 @@ export const CreateNewPassword = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Password" {...field} />
+                      <Input
+                        type={seePass1 ? "password" : "text"}
+                        placeholder="Password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -105,25 +127,43 @@ export const CreateNewPassword = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Input placeholder="Confirm" {...field} />
+                      <Input
+                        type={seePass2 ? "password" : "text"}
+                        placeholder="Confirm"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <div className="text-[#71717A] text-sm font-normal flex justify-start h-5 gap-2 ">
-                <Checkbox /> Show password
+                <Checkbox
+                  onClick={() => {
+                    setSeePass1((prev) => !prev);
+                    setSeePass2((prev) => !prev);
+                  }}
+                />
+                Show password
               </div>
             </div>
 
             <Button
+              type="submit"
+              variant={"default"}
+              className="w-full font-medium text-sm"
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? "Creating" : "Create password"}
+            </Button>
+
+            {/* <Button
               variant={"default"}
               type="submit"
               className="w-full font-medium text-sm"
-              onClick={() => setStep(1)}
             >
               Create password
-            </Button>
+            </Button> */}
           </form>
         </Form>
       </div>

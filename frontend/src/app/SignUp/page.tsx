@@ -1,12 +1,9 @@
 "use client";
 import { Dispatch, SetStateAction, useState, createContext } from "react";
 
-import { LoginStep } from "../(public)/_components/auth/LoginStep";
 import { CreateYourAccount } from "../(public)/_components/auth/CreateYourAccount";
 import { CreateStrongPassword } from "../(public)/_components/auth/CreateStrongPassword";
-import { ResetPassword } from "../(public)/_components/auth/ResetPassword";
-import { VerifyEmail } from "../(public)/_components/auth/VerifyEmail";
-import { CreateNewPassword } from "../(public)/_components/auth/CreateNewPassword";
+
 import { AnimatePresence, motion } from "framer-motion";
 
 type StepContextType = {

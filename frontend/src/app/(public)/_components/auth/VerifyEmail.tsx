@@ -71,6 +71,7 @@ export const VerifyEmail = () => {
       <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
         <Button
           onClick={() => setStep(2)}
+          type="button"
           variant={"outline"}
           className="w-9 h-9 "
         >

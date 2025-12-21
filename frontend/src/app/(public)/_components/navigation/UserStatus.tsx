@@ -8,8 +8,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const UserStatus = () => {
+  //
+  const router = useRouter();
+  //
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,6 +35,9 @@ export const UserStatus = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Button
+            onClick={() => {
+              router.replace("/Login");
+            }}
             variant={"outline"}
             className="mt-2 rounded-full overflow-hidden"
           >

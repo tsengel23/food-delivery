@@ -23,9 +23,16 @@ import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
 
 const formSchema = z.object({
-  email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  email: z
+    .string()
+    .min(5, {
+      message: "Email must be at least 5 characters.",
+    })
+    .max(50, {
+      message: "Email is too long characters",
+    })
+    .toLowerCase()
+    .email("Need correct Email address"),
 });
 
 export const ResetPassword = () => {
@@ -69,6 +76,7 @@ export const ResetPassword = () => {
       <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
         <Button
           onClick={() => setStep(1)}
+          type="button"
           variant={"outline"}
           className="w-9 h-9 "
         >
