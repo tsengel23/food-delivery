@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useContext, useState } from "react";
-import { StepContext } from "@/app/Login/page";
+import { StepContext } from "@/app/login/page";
 import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const LogEnter = () => {
   return (
-    <Link href="/Login">
+    <Link href="/login">
       <div>
         <Button
           variant={"outline"}

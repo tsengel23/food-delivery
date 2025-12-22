@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useContext } from "react";
-import { StepContext } from "@/app/Login/page";
+import { StepContext } from "@/app/login/page";
 import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { FormFooter } from "./FormFooter";
@@ -89,7 +89,7 @@ export const LoginStep = () => {
     >
       <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
         <Button
-          // onClick={() => router.push("/SignUp")}
+          // onClick={() => router.push("/sign-up")}
           type="button"
           variant={"outline"}
           className="w-9 h-9 "
@@ -150,7 +150,7 @@ export const LoginStep = () => {
             <FormFooter
               text={"Don’t have an account?"}
               step={"Sign up"}
-              href={"/SignUp"}
+              href={"/sign-up"}
             />
           </form>
         </Form>

@@ -21,7 +21,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -32,7 +32,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -43,7 +43,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -54,7 +54,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -65,7 +65,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -76,7 +76,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -87,7 +87,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -98,7 +98,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -109,7 +109,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -120,7 +120,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -131,7 +131,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -142,7 +142,7 @@ const orderInfo = [
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
-    food: "Baas",
+    food: "Bantan",
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
@@ -153,8 +153,8 @@ const orderInfo = [
 
 export const AdminOrders = () => {
   return (
-    <div className=" w-full h-full border border-red-600">
-      <div className="mt-15 rounded-lg border border-indigo-600 ">
+    <div className=" w-full h-full border-3  border-red-600">
+      <div className="mt-15 rounded-lg border-3 border-indigo-600 ">
         <div className="flex justify-between p-4">
           <div className="flex flex-col justify-between">
             <h1 className="font-bold text-xl text-[#09090B]">Orders</h1>
@@ -171,7 +171,10 @@ export const AdminOrders = () => {
             </div>
             <div>
               <Button className="rounded-full" variant={"outline"}>
-                Change delivery state <span>1</span>
+                Change delivery state{" "}
+                <span className="w-8   h-5 rounded-full flex justify-center items-center border">
+                  1
+                </span>
               </Button>
             </div>
           </div>

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useContext, useState } from "react";
-import { StepContext } from "@/app/SignUp/page";
+import { StepContext } from "@/app/sign-up/page";
 import { FormHeader } from "./FormHeader";
 import { ChevronLeftIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -60,7 +60,7 @@ export const CreateStrongPassword = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    router.replace("/Login");
+    router.replace("/login");
   }
   return (
     <motion.div
@@ -153,7 +153,7 @@ export const CreateStrongPassword = () => {
             <FormFooter
               text={"Already have an account?"}
               step={"Log in"}
-              href={"/Login"}
+              href={"/login"}
             />
           </form>
         </Form>

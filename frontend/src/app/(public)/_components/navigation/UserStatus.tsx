@@ -36,7 +36,7 @@ export const UserStatus = () => {
         <DropdownMenuItem>
           <Button
             onClick={() => {
-              router.replace("/Login");
+              router.replace("/login");
             }}
             variant={"outline"}
             className="mt-2 rounded-full overflow-hidden"
