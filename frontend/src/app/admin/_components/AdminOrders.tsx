@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CalendarDays, ChevronsUpDown } from "lucide-react";
 import { DeliveryAddress } from "@/app/(public)/_components/navigation/DeliveryAddress";
 import { Button } from "@/components/ui/button";
+import { DeliveryStateButton } from "./DeliveryStateButton";
 
 const orderInfo = [
   {
@@ -25,8 +26,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -36,8 +37,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -47,8 +48,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -58,8 +59,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -69,8 +70,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -80,8 +81,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -91,8 +92,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -102,8 +103,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -113,8 +114,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
     check: false,
@@ -124,30 +125,8 @@ const orderInfo = [
     date: "2024/12/20",
     total: "$26.97",
     DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
-  },
-  {
-    check: false,
-    orderNumber: 1,
-    costumer: "Test@gamil.com",
-    food: "Bantan",
-    date: "2024/12/20",
-    total: "$26.97",
-    DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
-  },
-  {
-    check: false,
-    orderNumber: 1,
-    costumer: "Test@gamil.com",
-    food: "Bantan",
-    date: "2024/12/20",
-    total: "$26.97",
-    DeliveryAddress:
-      "2024/12/СБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоонСБД, 12-р хороо, СБД нэгдсэн эмнэлэг Sbd negdsen emneleg | 100 айлын гүүрэн гарцны хойд талд 4д ногоон20",
-    DeliveryState: "button",
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
 ];
 
@@ -183,21 +162,29 @@ export const AdminOrders = () => {
         <Table className="w-full border border-green-600">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">
+              <TableHead className="py-[18] px-4 border border-red-500">
                 <Checkbox />
               </TableHead>
-              <TableHead className="w-[100px]">№</TableHead>
-              <TableHead className="w-[100px]">Customer</TableHead>
-              <TableHead>Food</TableHead>
-              <TableHead>
-                <div className="flex gap-5 items-center border">
+              <TableHead className="p-6 border border-blue-500">№</TableHead>
+              <TableHead className="py-4 pl-4 pr-[130] border border-red-600">
+                Customer
+              </TableHead>
+              <TableHead className="py-4 pl-4 pr-[110] border border-blue-500">
+                Food
+              </TableHead>
+              <TableHead className="p-4 border border-red-600">
+                <div className="flex gap-20 items-center border">
                   Date
                   <ChevronsUpDown className="w-4 h-4" />{" "}
                 </div>
               </TableHead>
-              <TableHead>Total </TableHead>
-              <TableHead>Delivery Address</TableHead>
-              <TableHead>
+              <TableHead className="py-4 pl-4 pr-[110] border border-blue-500">
+                Total{" "}
+              </TableHead>
+              <TableHead className="py-4 pl-4 pr-[83] border border-red-600 ">
+                Delivery Address
+              </TableHead>
+              <TableHead className="p-4 border border-blue-600">
                 {" "}
                 <div className="flex gap-5 items-center border">
                   Delivery state
@@ -209,27 +196,21 @@ export const AdminOrders = () => {
           <TableBody>
             {orderInfo.map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="font-medium">
-                  <div>
-                    <Checkbox />
-                  </div>
+                <TableCell className="py-[18] px-4">
+                  <Checkbox />
                 </TableCell>
-                <TableCell>{item.orderNumber}</TableCell>
-                <TableCell>{item.costumer}</TableCell>
-                <TableCell>{item.food}</TableCell>
-                <TableCell>{item.date}</TableCell>
-                <TableCell>{item.total}</TableCell>
-                <TableCell>{item.DeliveryAddress}</TableCell>
-                <TableCell>{item.DeliveryState}</TableCell>
+                <TableCell className="pl-7">{item.orderNumber}</TableCell>
+                <TableCell className="pl-4">{item.costumer}</TableCell>
+                <TableCell className="pl-4">{item.food}</TableCell>
+                <TableCell className="pl-7">{item.date}</TableCell>
+                <TableCell className="pl-4">{item.total}</TableCell>
+                <TableCell className="whitespace-normal">
+                  {item.DeliveryAddress}
+                </TableCell>
+                <TableCell className="pl-8">{item.DeliveryState}</TableCell>
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,500.00</TableCell>
-            </TableRow>
-          </TableFooter>
         </Table>
       </div>
     </div>

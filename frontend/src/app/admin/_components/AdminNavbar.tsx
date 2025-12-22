@@ -8,13 +8,13 @@ import React, { useState } from "react";
 const AdminNavbar = () => {
   const [active, setActive] = useState("food");
   return (
-    <div className=" h-full w-fit border-2 border-green-500">
+    <div className=" h-full w-fit  border-green-500">
       <Link href="/">
         <div className="mt-9 mx-5">
           <img src="/logo2.png" />
         </div>
       </Link>
-      <div className="flex flex-col gap-6 mt-10 mx-5 border justify-between">
+      <div className="flex flex-col gap-6 mt-10 mx-5 justify-between">
         {/*  */}
         <Button
           onClick={() => setActive("food")}
