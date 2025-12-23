@@ -1,6 +1,3 @@
-// import type { RequestHandler } from "express";
-// import { FoodModel } from "../../database/schema/food.schema.js";
-
 import type { RequestHandler } from "express";
 import { FoodModel } from "../../database/schema/food.schema.js";
 
