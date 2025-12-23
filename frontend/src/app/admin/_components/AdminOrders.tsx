@@ -16,8 +16,53 @@ import { CalendarDays, ChevronsUpDown } from "lucide-react";
 import { DeliveryAddress } from "@/app/(public)/_components/navigation/DeliveryAddress";
 import { Button } from "@/components/ui/button";
 import { DeliveryStateButton } from "./DeliveryStateButton";
+import { AdminPagination } from "./AdminPagination";
 
 const orderInfo = [
+  {
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
+  {
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
+  {
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
+  {
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
   {
     check: false,
     orderNumber: 1,
@@ -212,6 +257,13 @@ export const AdminOrders = () => {
             ))}
           </TableBody>
         </Table>
+        {/* <AdminPagination
+          currentPage={currentPage}
+          totalPage={totalPage}
+          nextPage={nextPage}
+          prevPage={prevPage}
+          className=""
+        /> */}
       </div>
     </div>
   );
