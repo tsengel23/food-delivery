@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -23,17 +24,18 @@ export const ChangeDeliveryState = () => {
         </Button>
       </DialogTrigger>
 
-      {/* <DialogContent className="w-fit "> */}
       <DialogContent className="w-fit [&>button]:hidden">
         <div className="relative">
-          <Button
-            variant={"outline"}
-            className="w-7 h-7 rounded-full border absolute top-0 right-0"
-          >
-            <X className="w-4 h-4" />
-          </Button>
+          <DialogClose asChild>
+            <Button
+              variant={"outline"}
+              className="w-7 h-7 rounded-full border absolute top-0 right-0"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </DialogClose>
           <div className="flex flex-col gap-6">
-            <DialogTitle className="text-[#09090B] font-medium text-sm">
+            <DialogTitle className="text-[#09090B] font-medium text-lg">
               Change delivery state
             </DialogTitle>
 
@@ -42,7 +44,11 @@ export const ChangeDeliveryState = () => {
                 onClick={() => setActive("Delivered")}
                 type="button"
                 variant={"outline"}
-                className="rounded-full text-xs font-medium px-5  "
+                className={`rounded-full text-xs font-medium px-5 hover:bg-green-200 ${
+                  active === "Delivered"
+                    ? "border-green-500 text-black bg-green-200 "
+                    : ""
+                }`}
               >
                 Delivered
               </Button>
@@ -51,20 +57,26 @@ export const ChangeDeliveryState = () => {
                   setActive("Pending");
                 }}
                 type="button"
-                variant={"outline"}
-                className="rounded-full text-xs font-medium px-5 "
+                variant="outline"
+                className={`rounded-full text-xs font-medium px-5 hover:bg-red-200 ${
+                  active === "Pending"
+                    ? "border-red-500 text-black bg-red-200"
+                    : ""
+                }`}
               >
                 Pending
               </Button>
               <Button
                 onClick={() => {
-                  setActive("Cancelled");
+                  setActive("Canceled");
                 }}
                 type="button"
                 variant={"outline"}
-                className="rounded-full text-xs font-medium px-5 "
+                className={`rounded-full text-xs font-medium px-5  ${
+                  active === "Canceled" ? "border-black bg-gray-100" : ""
+                }`}
               >
-                Cancelled
+                Canceled
               </Button>
             </div>
             <Button variant={"default"} className="rounded-full py-2">

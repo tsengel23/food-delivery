@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Truck, Utensils } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AdminAvatar } from "./AdminAvatar";
 
 const AdminNavbar = () => {
   const pathname = usePathname();
   return (
-    <div className=" h-full w-fit  border-green-500">
+    <div className=" h-full w-fit border-green-500">
       <Link href="/">
         <div className="mt-9 mx-5">
           <img src="/logo2.png" />
@@ -19,7 +20,7 @@ const AdminNavbar = () => {
         <Link href="/admin/food-menu">
           <Button
             variant={pathname === "/admin/food-menu" ? "default" : "outline"}
-            className="rounded-full "
+            className="rounded-full w-[165]"
           >
             <div className="flex gap-2 ml-6">
               <Utensils /> Food menu
@@ -29,9 +30,9 @@ const AdminNavbar = () => {
         <Link href="/admin/orders">
           <Button
             variant={pathname === "/admin/orders" ? "default" : "outline"}
-            className="rounded-full "
+            className="rounded-full w-[165]"
           >
-            <div className="flex gap-2 ml-6">
+            <div className="flex gap-2 ">
               <Truck /> Orders
             </div>
           </Button>
@@ -61,6 +62,7 @@ const AdminNavbar = () => {
         {active === "orders" && <Orders />}
       </div> */}
       </div>
+      <AdminAvatar />
     </div>
   );
 };
