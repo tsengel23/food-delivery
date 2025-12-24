@@ -33,16 +33,22 @@ export const DeliveryStateButton = ({ state }: DeliveryStateButton) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <div className="flex flex-col py-3 pl-3 pr-15 gap-3">
-          <Button variant={"outline"} className="rounded-full p-0 ">
-            Pending
-          </Button>
-          <Button variant={"outline"} className="rounded-full p-0 ">
-            Delivered
-          </Button>
-          <Button variant={"outline"} className="rounded-full p-0 ">
-            Canceled
-          </Button>
+        <div className="flex flex-col gap-1 p-1">
+          <div className="flex justify-start  px-2 py-2">
+            <p className="text-[#18181B] font-medium text-xs border px-2 bg-gray-100 rounded-full cursor-pointer">
+              Pending
+            </p>
+          </div>
+          <div className="flex justify-start  px-2 py-2">
+            <p className="text-[#18181B] font-medium text-xs border px-2 bg-gray-100 rounded-full cursor-pointer">
+              Delivered
+            </p>
+          </div>
+          <div className="flex justify-start  px-2 py-2">
+            <p className="text-[#18181B] font-medium text-xs border px-2 bg-gray-100 rounded-full cursor-pointer">
+              Canceled
+            </p>
+          </div>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

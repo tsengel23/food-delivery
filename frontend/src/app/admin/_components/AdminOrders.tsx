@@ -17,6 +17,7 @@ import { DeliveryAddress } from "@/app/(public)/_components/navigation/DeliveryA
 import { Button } from "@/components/ui/button";
 import { DeliveryStateButton } from "./DeliveryStateButton";
 import { AdminPagination } from "./AdminPagination";
+import { ChangeDeliveryState } from "./ChangeDeliveryState";
 
 const orderInfo = [
   {
@@ -178,7 +179,7 @@ const orderInfo = [
 export const AdminOrders = () => {
   return (
     <div className=" w-full h-full border-3  border-red-600">
-      <div className="mt-15 rounded-lg border-3 border-indigo-600 ">
+      <div className="mt-15 rounded-lg border-3 border-indigo-600 overflow-x-hidden  ">
         <div className="flex justify-between p-4">
           <div className="flex flex-col justify-between">
             <h1 className="font-bold text-xl text-[#09090B]">Orders</h1>
@@ -194,12 +195,7 @@ export const AdminOrders = () => {
               </Button>
             </div>
             <div>
-              <Button className="rounded-full" variant={"outline"}>
-                Change delivery state{" "}
-                <span className="w-8   h-5 rounded-full flex justify-center items-center border">
-                  1
-                </span>
-              </Button>
+              <ChangeDeliveryState />
             </div>
           </div>
         </div>
