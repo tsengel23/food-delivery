@@ -19,7 +19,7 @@ export const ChangeDeliveryState = () => {
         <Button className="rounded-full" variant={"outline"}>
           Change delivery state
           <span className="w-8   h-5 rounded-full flex justify-center items-center border">
-            1
+            1{/* {ids.length} */}
           </span>
         </Button>
       </DialogTrigger>
@@ -79,7 +79,11 @@ export const ChangeDeliveryState = () => {
                 Canceled
               </Button>
             </div>
-            <Button variant={"default"} className="rounded-full py-2">
+            <Button
+              type="reset"
+              variant={"default"}
+              className="rounded-full py-2"
+            >
               Save
             </Button>
           </div>

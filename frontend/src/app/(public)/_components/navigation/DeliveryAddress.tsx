@@ -22,6 +22,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronRight, MapPin, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+export function TextareaDemo() {
+  return <Textarea placeholder="Type your message here." />;
+}
 
 export const DeliveryAddress = () => {
   const [address, setAddress] = useState("");
@@ -54,14 +59,18 @@ export const DeliveryAddress = () => {
             Please write your delivery address!
           </DialogTitle>
           <div className="relative">
-            <Input
+            <Textarea
+              placeholder="Please share your complete address"
+              className="w-full min-w-0 resize-none overflow-hidden break-all"
+            />
+            {/* <Input
               value={address}
               // onChange={handleChange}
               onChange={(el) => setAddress(el.target.value)}
               type="text"
               placeholder="Please share your complete address"
               className=""
-            />
+            /> */}
             {address && (
               <Button
                 type="button"
@@ -84,7 +93,9 @@ export const DeliveryAddress = () => {
           <Button type="button" variant={"outline"}>
             Cancel
           </Button>
-          <Button>Deliver Here</Button>
+          <Button type="submit" variant={"default"}>
+            Deliver Here
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

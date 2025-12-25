@@ -1,13 +1,9 @@
+import { MyCartFood } from "@/app/(public)/_components/MyCartFood";
+
 export default function HomeAdminMenu() {
   return (
     <div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+      <MyCartFood />
     </div>
   );
 }

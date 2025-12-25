@@ -18,12 +18,28 @@ export const AdminCalendar = () => {
     to: new Date(),
   });
 
+  //
+  const formatDate = (date?: Date) => {
+    if (!date) return "";
+    return date.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const renderLabel = () => {
+    if (!dateRange?.from) return "Pick a date";
+    if (!dateRange.to) return formatDate(dateRange.from);
+    return `${formatDate(dateRange.from)} - ${formatDate(dateRange.to)}`;
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button className="rounded-full pl-4 " variant={"outline"}>
           <CalendarDays />
-          {Date()}
+          {renderLabel()}
           {/* 13 June 2023 - 14 July 2023 */}
         </Button>
       </PopoverTrigger>

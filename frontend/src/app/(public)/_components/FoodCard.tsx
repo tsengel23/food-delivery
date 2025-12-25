@@ -25,6 +25,10 @@ type FoodCard = {
 export const FoodCard = ({ image, title, overview, price }: FoodCard) => {
   const [count, setCount] = useState(1);
   const [selected, setSelected] = useState(false);
+  const unitPrice = Number(price);
+  const totalPrice = unitPrice * count;
+  const formattedTotalPrice = totalPrice.toFixed(2);
+
   return (
     <div className="relative">
       <Dialog>
@@ -42,7 +46,7 @@ export const FoodCard = ({ image, title, overview, price }: FoodCard) => {
                   {title}
                 </h1>
                 <p className="text-[#09090B] text-lg font-semibold">
-                  $<span>{price}</span>
+                  $<span>{formattedTotalPrice}</span>
                 </p>
               </div>
               <p className="text-[#09090B] text-sm font-normal mt-2">
@@ -74,7 +78,7 @@ export const FoodCard = ({ image, title, overview, price }: FoodCard) => {
                       Total price
                     </p>
                     <p className="text-[#09090B] text-2xl font-semibold">
-                      $<span>{price}</span>
+                      $<span>{formattedTotalPrice}</span>
                     </p>
                   </div>
                   <div className="flex gap-3 items-center">

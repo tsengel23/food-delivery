@@ -12,6 +12,17 @@ import {
 import { ShoppingCart, X } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import { MyCartFood } from "../MyCartFood";
+
+const foods = [
+  {
+    image: "food2.png",
+    title: "Finger food",
+    overview:
+      "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    price: "12.99",
+  },
+];
 
 export const Order = () => {
   return (
