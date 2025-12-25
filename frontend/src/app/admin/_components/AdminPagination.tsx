@@ -33,20 +33,27 @@ export const AdminPagination = ({
             <Button
               onClick={prevPage}
               disabled={currentPage === 1}
-              variant="outline"
+              variant="ghost"
             >
-              <ChevronLeft /> Previous
+              <ChevronLeft />
             </Button>
           </PaginationItem>
           {currentPage > 1 && (
             <PaginationItem>
-              <Button onClick={prevPage} variant="outline">
+              <Button
+                className="w-8 h-8 rounded-full"
+                onClick={prevPage}
+                variant="outline"
+              >
                 {currentPage - 1}
               </Button>
             </PaginationItem>
           )}
           <PaginationItem>
-            <Button variant="default" className="bg-gray-400">
+            <Button
+              variant="default"
+              className="bg-gray-400 w-8 h-8 rounded-full"
+            >
               {currentPage}
             </Button>
           </PaginationItem>
@@ -64,9 +71,9 @@ export const AdminPagination = ({
             <Button
               onClick={nextPage}
               disabled={currentPage === totalPage}
-              variant="outline"
+              variant="ghost"
             >
-              Next <ChevronRight />
+              <ChevronRight />
             </Button>
           </PaginationItem>
         </PaginationContent>

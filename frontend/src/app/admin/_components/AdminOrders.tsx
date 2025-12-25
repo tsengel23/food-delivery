@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { DeliveryStateButton } from "./DeliveryStateButton";
 import { AdminPagination } from "./AdminPagination";
 import { ChangeDeliveryState } from "./ChangeDeliveryState";
+import { AdminCalendar } from "./AdminCalendar";
+import { useState } from "react";
 
 const orderInfo = [
   {
@@ -174,12 +176,53 @@ const orderInfo = [
       "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
+  {
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
+  {
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
+  {
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
 ];
 
 export const AdminOrders = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const nextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
+  const prevPage = () => {
+    setCurrentPage((prev) => prev - 1);
+  };
   return (
     <div className="border-2 border-blue-400">
-      <div className="flex justify-between p-4 mt-15 border-2 rounded-tl-lg rounded-tr-lg ">
+      <div className="flex justify-between p-4 mt-15 border-2 rounded-tl-lg rounded-tr-lg">
         <div className="flex flex-col justify-between">
           <h1 className="font-bold text-xl text-[#09090B]">Orders</h1>
           <p className="font-medium text-xs text-[#71717A]">
@@ -188,10 +231,11 @@ export const AdminOrders = () => {
         </div>
         <div className="flex gap-3">
           <div>
-            <Button className="rounded-full pl-4 " variant={"outline"}>
+            <AdminCalendar />
+            {/* <Button className="rounded-full pl-4 " variant={"outline"}>
               <CalendarDays />
               13 June 2023 - 14 July 2023
-            </Button>
+            </Button> */}
           </div>
           <div>
             <ChangeDeliveryState />
@@ -199,7 +243,7 @@ export const AdminOrders = () => {
         </div>
       </div>
 
-      <Table className="w-full border border-green-600 ">
+      <Table className="w-full border border-green-600  mb-6">
         <TableHeader>
           <TableRow>
             <TableHead className="py-[18] px-4 border border-red-500">
@@ -215,26 +259,25 @@ export const AdminOrders = () => {
             <TableHead className="p-4 border border-red-600">
               <div className="flex gap-20 items-center border">
                 Date
-                <ChevronsUpDown className="w-4 h-4" />{" "}
+                <ChevronsUpDown className="w-4 h-4" />
               </div>
             </TableHead>
             <TableHead className="py-4 pl-4 pr-[110] border border-blue-500">
-              Total{" "}
+              Total
             </TableHead>
             <TableHead className="py-4 pl-4 pr-[83] border border-red-600 ">
               Delivery Address
             </TableHead>
             <TableHead className="p-4 border border-blue-600">
-              {" "}
               <div className="flex gap-5 items-center border">
                 Delivery state
-                <ChevronsUpDown className="w-4 h-4" />{" "}
+                <ChevronsUpDown className="w-4 h-4" />
               </div>
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orderInfo.map((item, index) => (
+          {orderInfo.slice(0, 12).map((item, index) => (
             <TableRow key={index}>
               <TableCell className="py-[18] px-4">
                 <Checkbox />
@@ -252,13 +295,15 @@ export const AdminOrders = () => {
           ))}
         </TableBody>
       </Table>
-      {/* <AdminPagination
+      <div className="border border-red-500 mb-[52] py-4">
+        <AdminPagination
           currentPage={currentPage}
           totalPage={totalPage}
           nextPage={nextPage}
           prevPage={prevPage}
           className=""
-        /> */}
+        />
+      </div>
     </div>
   );
 };
