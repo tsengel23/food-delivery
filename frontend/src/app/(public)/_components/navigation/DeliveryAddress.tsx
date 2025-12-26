@@ -90,9 +90,11 @@ export const DeliveryAddress = () => {
           </DialogClose>
         </DialogHeader>
         <div className="flex gap-4 justify-end mt-12">
-          <Button type="button" variant={"outline"}>
-            Cancel
-          </Button>
+          <DialogClose asChild>
+            <Button type="button" variant={"outline"}>
+              Cancel
+            </Button>
+          </DialogClose>
           <Button type="submit" variant={"default"}>
             Deliver Here
           </Button>
