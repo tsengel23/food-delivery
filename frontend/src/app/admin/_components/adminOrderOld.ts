@@ -20,22 +20,10 @@ import { AdminPagination } from "./AdminPagination";
 import { ChangeDeliveryState } from "./ChangeDeliveryState";
 import { useState } from "react";
 import { AdminCalendar } from "./AdminCalendar";
-import { DeliveryState, DeliveryStateButton1 } from "./DeliveryStateButton1";
 
 const orderInfo = [
   {
-    check: false,
-    orderNumber: 1,
-    costumer: "Test@gamil.com",
-    food: "Bantan",
-    date: "2024/12/20",
-    total: "$26.97",
-    DeliveryAddress:
-      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
-    DeliveryState: <DeliveryStateButton1 />,
-    // DeliveryState: <DeliveryStateButton state={"Pending"} />,
-  },
-  {
+    id: 0,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -47,6 +35,19 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 1,
+    check: false,
+    orderNumber: 1,
+    costumer: "Test@gamil.com",
+    food: "Bantan",
+    date: "2024/12/20",
+    total: "$26.97",
+    DeliveryAddress:
+      "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
+    DeliveryState: <DeliveryStateButton state={"Pending"} />,
+  },
+  {
+    id: 2,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -58,6 +59,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Delivered"} />,
   },
   {
+    id: 3,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -69,6 +71,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Canceled"} />,
   },
   {
+    id: 4,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -80,6 +83,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 5,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -91,6 +95,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 6,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -102,6 +107,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 7,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -113,6 +119,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 8,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -124,6 +131,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 9,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -135,6 +143,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 10,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -146,6 +155,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 11,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -157,6 +167,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 12,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -168,6 +179,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 13,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -179,6 +191,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 14,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -190,6 +203,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 15,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -201,6 +215,7 @@ const orderInfo = [
     DeliveryState: <DeliveryStateButton state={"Pending"} />,
   },
   {
+    id: 16,
     check: false,
     orderNumber: 1,
     costumer: "Test@gamil.com",
@@ -214,7 +229,13 @@ const orderInfo = [
 ];
 
 export const AdminOrders = () => {
-  const [state, setState] = useState<DeliveryState>("Pending");
+  const [orders, setOrders] = useState(
+    orderInfo.map((order) => ({
+      ...order,
+      checked: false,
+    }))
+  );
+  const selectedCount = orders.filter((o) => o.checked).length;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const nextPage = () => {
@@ -241,7 +262,7 @@ export const AdminOrders = () => {
             </Button> */}
           </div>
           <div>
-            <ChangeDeliveryState stateNumber={1} />
+            <ChangeDeliveryState stateNumber={selectedCount} />
           </div>
         </div>
       </div>
@@ -250,7 +271,19 @@ export const AdminOrders = () => {
         <TableHeader>
           <TableRow>
             <TableHead className="py-[18] px-4 border border-red-500">
-              <Checkbox />
+              <Checkbox
+                checked={
+                  orders.length > 0 && orders.every((order) => order.checked)
+                }
+                onCheckedChange={(value) => {
+                  setOrders((prev) =>
+                    prev.map((order) => ({
+                      ...order,
+                      checked: !!value,
+                    }))
+                  );
+                }}
+              />
             </TableHead>
             <TableHead className="p-6 border border-blue-500">№</TableHead>
             <TableHead className="py-4 pl-4 pr-[130] border border-red-600">
@@ -280,10 +313,21 @@ export const AdminOrders = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {orderInfo.slice(0, 12).map((item, index) => (
-            <TableRow key={index}>
+          {orders.slice(0, 12).map((item) => (
+            <TableRow key={item.id}>
               <TableCell className="py-[18] px-4">
-                <Checkbox />
+                <Checkbox
+                  checked={item.checked}
+                  onCheckedChange={(value) => {
+                    setOrders((prev) =>
+                      prev.map((order) =>
+                        order.id === item.id
+                          ? { ...order, checked: !!value }
+                          : order
+                      )
+                    );
+                  }}
+                />
               </TableCell>
               <TableCell className="pl-7">{item.orderNumber}</TableCell>
               <TableCell className="pl-4">{item.costumer}</TableCell>

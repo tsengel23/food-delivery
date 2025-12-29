@@ -10,8 +10,13 @@ import {
 } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 import { useState } from "react";
+type ChangeDeliveryStateProps = {
+  stateNumber: number;
+};
 
-export const ChangeDeliveryState = () => {
+export const ChangeDeliveryState = ({
+  stateNumber,
+}: ChangeDeliveryStateProps) => {
   const [active, setActive] = useState<string>("");
   return (
     <Dialog>
@@ -19,7 +24,7 @@ export const ChangeDeliveryState = () => {
         <Button className="rounded-full" variant={"outline"}>
           Change delivery state
           <span className="w-8   h-5 rounded-full flex justify-center items-center border">
-            1{/* {ids.length} */}
+            {stateNumber}
           </span>
         </Button>
       </DialogTrigger>

@@ -14,6 +14,7 @@
 
 // export type DeliveryStateButton = {
 //   state: DeliveryState;
+
 //   onChange: (state: DeliveryState) => void;
 // };
 // export const DeliveryStateButton = ({
@@ -71,8 +72,12 @@ type DeliveryState = "Pending" | "Delivered" | "Canceled";
 
 type DeliveryStateButton = {
   state: DeliveryState;
+  // onChange: (state: DeliveryState) => void;
 };
-export const DeliveryStateButton = ({ state }: DeliveryStateButton) => {
+export const DeliveryStateButton = ({
+  state,
+}: // onChange,
+DeliveryStateButton) => {
   const stateStyle = {
     Pending: "border-red-600 text-red-600",
     Delivered: "border-green-500 text-green-500",

@@ -9,7 +9,7 @@ import { AdminAvatar } from "./AdminAvatar";
 const AdminNavbar = () => {
   const pathname = usePathname();
   return (
-    <div className=" h-full w-fit border-green-500">
+    <div className="h-full w-fit border-green-500 fixed z-10">
       <Link href="/">
         <div className="mt-9 mx-5">
           <img src="/logo2.png" />
@@ -56,13 +56,11 @@ const AdminNavbar = () => {
           </div>
         </Button> */}
 
-        {/* 
-      <div className="p-6 border rounded-xl">
-        {active === "food" && <FoodMenu />}
-        {active === "orders" && <Orders />}
-      </div> */}
+        {/* <div className="p-6 border rounded-xl">
+          {active === "food" && <FoodMenu />}
+          {active === "orders" && <Orders />}
+        </div> */}
       </div>
-      <AdminAvatar />
     </div>
   );
 };

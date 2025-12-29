@@ -58,19 +58,25 @@ export const DeliveryAddress = () => {
           <DialogTitle className="text-2xl font-semibold text-[#09090B] mt-1">
             Please write your delivery address!
           </DialogTitle>
-          <div className="relative">
-            <Textarea
-              placeholder="Please share your complete address"
-              className="w-full min-w-0 resize-none overflow-hidden break-all"
-            />
-            {/* <Input
+          <DialogClose className="absolute top-0 right-0">
+            <div className="w-10 h-10  rounded-full bg-[#F4F4F5] flex justify-center items-center hover:bg-gray-300">
+              <X className="w-4 h-4" />
+            </div>
+          </DialogClose>
+        </DialogHeader>
+        <div className="relative">
+          <Textarea
+            placeholder="Please share your complete address"
+            className="w-full min-w-0 resize-none overflow-hidden break-all"
+          />
+          {/* <Input
               value={address}
               // onChange={handleChange}
               onChange={(el) => setAddress(el.target.value)}
               type="text"
               placeholder="Please share your complete address"
               className=""
-            /> */}
+            />
             {address && (
               <Button
                 type="button"
@@ -81,23 +87,20 @@ export const DeliveryAddress = () => {
               >
                 <X />
               </Button>
-            )}
-          </div>
-          <DialogClose className="absolute top-0 right-0">
-            <div className="w-10 h-10  rounded-full bg-[#F4F4F5] flex justify-center items-center hover:bg-gray-300">
-              <X className="w-4 h-4" />
-            </div>
-          </DialogClose>
-        </DialogHeader>
+            )} */}
+        </div>
+
         <div className="flex gap-4 justify-end mt-12">
-          <DialogClose asChild>
-            <Button type="button" variant={"outline"}>
-              Cancel
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button type="button" variant={"outline"}>
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button type="submit" variant={"default"}>
+              Deliver Here
             </Button>
-          </DialogClose>
-          <Button type="submit" variant={"default"}>
-            Deliver Here
-          </Button>
+          </DialogFooter>
         </div>
       </DialogContent>
     </Dialog>

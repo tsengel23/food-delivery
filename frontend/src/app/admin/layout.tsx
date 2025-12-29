@@ -1,3 +1,4 @@
+import { AdminAvatar } from "./_components/AdminAvatar";
 import AdminNavbar from "./_components/AdminNavbar";
 
 export default function RootLayout({
@@ -6,9 +7,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-screen h-screen flex">
+    <div>
       <AdminNavbar />
-
+      <AdminAvatar />
       {children}
     </div>
   );

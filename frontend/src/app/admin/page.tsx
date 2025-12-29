@@ -1,13 +1,16 @@
-import AdminNavbar from "./_components/AdminNavbar";
-import { AdminOrders } from "./_components/AdminOrders";
+import { AddCategoryButton } from "./_components/AddCategoryButton";
+import { AddNewDishTo } from "./_components/AddNewDishTo";
+import { AdminFoodMenu } from "./_components/AdminFoodMenu";
+import { CategoryPill } from "./_components/CategoryPill";
+import { ImageUpload } from "./_components/ImageUpload";
 
 export default function AdminPage() {
   return (
-    <div className="w-screen h-screen border-4 border-red-500  relative">
-      <div className="m-6 border absolute object-cover inset-0 z-10">
-        {/* <AdminNavbar /> */}
-        <AdminOrders />
-      </div>
+    <div className="w-200 h-200 border-3 border-red-500 p-6 ml-[205px] bg-gray-50 ">
+      {/* <CategoryBar categories={} /> */}
+      {/* <AddCategoryButton /> */}
+      <AddNewDishTo />
+      <ImageUpload />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 import { useState } from "react";
 
 type MyCartFood = {
@@ -14,16 +14,16 @@ export const MyCartFood = ({ image, title, overview, price }: MyCartFood) => {
   const [count, setCount] = useState(1);
   return (
     <div>
-      <div className="flex gap-[10] border border-red-400 my-2">
-        <div className="rounded-xl border border-red-500 relative overflow-hidden flex-shrink-0 w-30 h-30">
+      <div className="flex gap-[10px] border border-red-400 relative">
+        <div className="rounded-xl border border-red-500 relative overflow-hidden flex-shrink-0 w-32 h-32">
           <img
-            src={image}
+            src={image ?? "/food2.png"}
             //   src="/food2.png"
             className="absolute w-full h-full inset-0 top-0 left-0 object-cover"
           />
         </div>
         <div className="flex flex-col gap-6 border border-red-400">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2">
             <h1 className="text-[#EF4444] text-base font-bold">
               {title}
               {/* Sunshine Stackers */}
@@ -37,13 +37,16 @@ export const MyCartFood = ({ image, title, overview, price }: MyCartFood) => {
           <div className="flex justify-between border border-green-500 items-center">
             <div className="flex items-center gap-2">
               <Button
+                disabled={count === 1}
                 className="p-0"
                 variant={"ghost"}
                 onClick={() => setCount((prev) => Math.max(1, prev - 1))}
               >
                 <Minus className="w-4 h-4" />
               </Button>
-              <span className="text-[#09090B] text-lg font-semibold">1</span>
+              <span className="text-[#09090B] text-lg font-semibold">
+                {count}
+              </span>
               <Button
                 variant={"ghost"}
                 onClick={() => {
@@ -58,8 +61,15 @@ export const MyCartFood = ({ image, title, overview, price }: MyCartFood) => {
             </p>
           </div>
         </div>
+        <Button
+          variant={"outline"}
+          type="button"
+          className="flex justify-center items-center rounded-full w-7 h-7 absolute top-1 right-1 border border-[#EF4444]"
+        >
+          <X className="w-3 h-3 text-[#EF4444]" />
+        </Button>
       </div>
-      <div className="border-t border-dashed border-gray-300" />
+      <div className="border-t border-dashed border-gray-300 my-4" />
     </div>
   );
 };
