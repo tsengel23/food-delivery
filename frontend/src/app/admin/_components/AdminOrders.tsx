@@ -32,8 +32,7 @@ const orderInfo = [
     total: "$26.97",
     DeliveryAddress:
       "СБД, 12-р хороо, СБД нэгдсэн эмнэлэг | 100 айлын гүүрэн гарцны хойд талд 4-д ногоон байр , 5-орц 5-давхар 97-тоот орцны код #1526",
-    DeliveryState: <DeliveryStateButton1 />,
-    // DeliveryState: <DeliveryStateButton state={"Pending"} />,
+    DeliveryState: <DeliveryStateButton1 state={"Pending"} />,
   },
   {
     check: false,
@@ -214,7 +213,6 @@ const orderInfo = [
 ];
 
 export const AdminOrders = () => {
-  const [state, setState] = useState<DeliveryState>("Pending");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const nextPage = () => {
@@ -225,7 +223,7 @@ export const AdminOrders = () => {
   };
   return (
     <div className="border-blue-400">
-      <div className="flex justify-between p-4 mt-15 border-2 rounded-tl-lg rounded-tr-lg">
+      <div className="flex justify-between p-4 border-2 rounded-tl-lg rounded-tr-lg">
         <div className="flex flex-col justify-between">
           <h1 className="font-bold text-xl text-[#09090B]">Orders</h1>
           <p className="font-medium text-xs text-[#71717A]">

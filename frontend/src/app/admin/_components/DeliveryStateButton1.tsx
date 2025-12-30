@@ -15,29 +15,25 @@ export type DeliveryState = "Pending" | "Delivered" | "Canceled";
 
 type DeliveryStateButton1 = {
   state: DeliveryState;
-  // onChange: (state: DeliveryState) => void;
 };
 
-export const DeliveryStateButton1 = ({
-  state,
-}: // onChange,
-DeliveryStateButton1) => {
-  const stateStyle = {
-    Pending: "border-red-600 text-red-600",
-    Delivered: "border-green-500 text-green-500",
-    Canceled: "border-gray-300 text-gray-600",
-  };
+const stateStyle = {
+  Pending: "border-red-600 text-red-600",
+  Delivered: "border-green-500 text-green-500",
+  Canceled: "border-gray-300 text-gray-600",
+};
+
+export const DeliveryStateButton1 = ({ state }: DeliveryStateButton1) => {
   return (
-    // <Select value={state} onValueChange={onChange}>
-    <Select>
-      <div className="relative border border-red-400">
-        <SelectTrigger
-          className={`w-fit pr-8 rounded-full [&>svg]:hidden ${stateStyle[state]}`}
-        >
+    <Select value={state}>
+      <SelectTrigger
+        className={`w-fit rounded-full [&>svg]:hidden ${stateStyle[state]}`}
+      >
+        <div className="flex gap-3 items-center">
           <SelectValue />
-        </SelectTrigger>
-        <ChevronsUpDown className="absolute w-4 h-4 top-2.5 right-5" />
-      </div>
+          <ChevronsUpDown className=" w-4 h-4 " />
+        </div>
+      </SelectTrigger>
 
       <SelectContent>
         <SelectItem value="Pending">Pending</SelectItem>

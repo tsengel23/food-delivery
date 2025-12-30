@@ -21,9 +21,9 @@ export const ChangeDeliveryState = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="rounded-full" variant={"outline"}>
+        <Button className="rounded-full" variant={"default"}>
           Change delivery state
-          <span className="w-8   h-5 rounded-full flex justify-center items-center border">
+          <span className="w-8   h-5 rounded-full flex justify-center items-center border bg-white text-black">
             {stateNumber}
           </span>
         </Button>

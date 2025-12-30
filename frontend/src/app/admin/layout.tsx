@@ -7,10 +7,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="flex w-full">
       <AdminNavbar />
-      <AdminAvatar />
-      {children}
+      <div className="w-full bg-secondary p-6 pr-10">
+        <AdminAvatar />
+        {children}
+      </div>
     </div>
   );
 }

@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 export const AdminAvatar = () => {
   const router = useRouter();
   return (
-    <div className="absolute top-3 right-3 ">
+    <div className="w-full flex justify-end">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className="w-11 h-11 cursor-pointer">
