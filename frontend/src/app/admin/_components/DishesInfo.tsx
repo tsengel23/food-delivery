@@ -1,5 +1,12 @@
 "use client";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Dialog,
   DialogClose,
   DialogContent,
@@ -9,7 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ImageIcon, Pencil, Plus, X } from "lucide-react";
+import { ImageIcon, Pencil, Plus, Trash, X } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -26,17 +33,26 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import Image from "next/image";
 
 const formSchema = z.object({
-  dishesName: z.string()
-  dishesName: z.string()
+  dishesName: z.string(),
+  dishCategory: z.string(),
+  ingredients: z.string(),
+  price: z.string(),
+  image: z.instanceof(File).optional(),
 });
 
 export const DishesInfo = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-       dishesName: "",
+      dishesName: "",
+      dishCategory: "",
+      ingredients: "",
+      price: "",
+      image: undefined,
     },
   });
 
@@ -60,75 +76,143 @@ export const DishesInfo = () => {
           </Button>
         </DialogTrigger>
       </div>
-      <DialogContent>
+      <DialogContent className="[&>button]:hidden">
+        <DialogHeader className=" w-full relative border">
+          <DialogTitle className="text-[#09090B] font-semibold text-lg mb-5">
+            Dishes info
+          </DialogTitle>
+          <DialogClose asChild>
+            <button className="flex justify-center items-center w-8 h-8 rounded-full border hover:bg-gray-300 absolute top-0 right-0">
+              <X className="w-3 h-3 text-black" />
+            </button>
+          </DialogClose>
+        </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="username"
+              name="dishesName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Dish name</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Name here..." {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="username"
+              name="dishCategory"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Dish category</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    {/* <Input placeholder="Category here..." {...field} /> */}
+                    <Select {...field} onValueChange={field.onChange}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Theme" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Appetizer">Appetizer</SelectItem>
+                        <SelectItem value="pizzas">pizzas</SelectItem>
+                        <SelectItem value="salads">System</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="username"
+              name="ingredients"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Ingredients</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Textarea
+                      className="resize-none break-all h-30 w-full"
+                      placeholder="Ingredients here..."
+                      {...field}
+                    />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="username"
+              name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Price here..." {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
-            <Button type="submit">Submit</Button>
+            <FormField
+              control={form.control}
+              name="image"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image</FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        type="file"
+                        placeholder="Image file"
+                        className="absolute w-full h-full top-0 left-0 opacity-0 z-10 cursor-pointer"
+                        onChange={(e) => {
+                          const files = e.target.files;
+                          if (!files) return;
+                          const [file] = files;
+                          field.onChange(file);
+                        }}
+                      />
+                      {field.value && (
+                        <div className="absolute w-full h-full top-0 left-0 rounded-xl overflow-hidden">
+                          <Image
+                            src={URL.createObjectURL(field.value)}
+                            alt="image"
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
+                      <div className="w-full h-40 rounded-xl border border-dashed border-[#2563EB33] flex justify-center items-center bg-[#2563EB0D]">
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="w-9 h-9 rounded-full flex justify-center items-center bg-white">
+                            <ImageIcon className="text-black" />
+                          </div>
+                          Choose a file or drag & drop it here
+                        </div>
+                      </div>
+                    </div>
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className=" flex justify-between">
+              <Button
+                type="submit"
+                variant={"outline"}
+                className="w-9 h-9 border border-red-600"
+              >
+                <Trash className="w-4 h-4 text-red-600" />
+              </Button>
+              <Button type="submit">Submit</Button>
+            </div>
           </form>
         </Form>
       </DialogContent>
