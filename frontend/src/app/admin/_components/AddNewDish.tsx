@@ -333,7 +333,7 @@ export const AddNewDish = ({ title }: AddNewDish) => {
                     <FormLabel>Ingredients</FormLabel>
                     <FormControl>
                       <Textarea
-                        className="resize-none break-all h-30 w-full"
+                        className="resize-none break-all h-30 w-full overflow-y-hidden"
                         placeholder="List ingredients..."
                         {...field}
                       />

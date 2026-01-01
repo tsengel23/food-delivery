@@ -14,11 +14,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const OpenAuthDialog = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [active, setActive] = useState(true);
   return (
     <Dialog>
-      <DialogTrigger>OpenAuthDialog</DialogTrigger>
+      <DialogTrigger className="text-white">OpenAuthDialog</DialogTrigger>
       <DialogContent className="aspect-[429/184] w-[429px] p-6  rounded-2xl [&>button]:hidden">
         <div className="relative flex flex-col justify-between overflow-hidden">
           <DialogHeader className="flex justify-center">

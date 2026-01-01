@@ -10,10 +10,10 @@ export default function AdminPage() {
   return (
     <div className="w-300 h-300 border-3 border-red-500 p-6 ml-[205px] bg-gray-50 ">
       {/* <CategoryBar categories={} /> */}
-      {/* <AddCategoryButton /> */}
+      <AddCategoryButton />
       {/* <AddNewCategoryButton /> */}
-      <DishesInfo />
-      {/* <ImageUpload /> */}
+      {/* <DishesInfo /> */}
+      <ImageUpload />
       {/* <AddNewDish title={"salads"} /> */}
     </div>
   );

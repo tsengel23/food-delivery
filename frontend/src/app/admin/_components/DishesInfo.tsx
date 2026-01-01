@@ -16,7 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ImageIcon, Pencil, Plus, Trash, X } from "lucide-react";
+import { ImageIcon, Pencil, Trash, X } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -76,9 +76,9 @@ export const DishesInfo = () => {
           </Button>
         </DialogTrigger>
       </div>
-      <DialogContent className="[&>button]:hidden">
-        <DialogHeader className=" w-full relative border">
-          <DialogTitle className="text-[#09090B] font-semibold text-lg mb-5">
+      <DialogContent className="[&>button]:hidden ">
+        <DialogHeader className=" w-full relative">
+          <DialogTitle className="text-[#09090B] font-semibold text-xl mb-5">
             Dishes info
           </DialogTitle>
           <DialogClose asChild>
@@ -88,130 +88,156 @@ export const DishesInfo = () => {
           </DialogClose>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="dishesName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Dish name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Name here..." {...field} />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="dishCategory"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Dish category</FormLabel>
-                  <FormControl>
-                    {/* <Input placeholder="Category here..." {...field} /> */}
-                    <Select {...field} onValueChange={field.onChange}>
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Theme" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Appetizer">Appetizer</SelectItem>
-                        <SelectItem value="pizzas">pizzas</SelectItem>
-                        <SelectItem value="salads">System</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="ingredients"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ingredients</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      className="resize-none break-all h-30 w-full"
-                      placeholder="Ingredients here..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Price here..." {...field} />
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="image"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Image</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        type="file"
-                        placeholder="Image file"
-                        className="absolute w-full h-full top-0 left-0 opacity-0 z-10 cursor-pointer"
-                        onChange={(e) => {
-                          const files = e.target.files;
-                          if (!files) return;
-                          const [file] = files;
-                          field.onChange(file);
-                        }}
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className=" border-red-500"
+          >
+            <div className="flex flex-col items-end relative border-blue-500">
+              <FormField
+                control={form.control}
+                name="dishesName"
+                render={({ field }) => (
+                  <FormItem className="mb-6">
+                    <FormLabel className=" w-full absolute left-0">
+                      Dish name
+                    </FormLabel>
+                    <FormControl className="w-[288px]">
+                      <Input placeholder="Name here..." {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dishCategory"
+                render={({ field }) => (
+                  <FormItem className="mb-6">
+                    <FormLabel className=" w-full absolute left-0">
+                      Dish category
+                    </FormLabel>
+                    <FormControl>
+                      {/* <Input placeholder="Category here..." {...field} /> */}
+                      <Select {...field} onValueChange={field.onChange}>
+                        <SelectTrigger className="w-[288px]">
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="appetizer">Appetizers</SelectItem>
+                          <SelectItem value="pizzas">Pizzas</SelectItem>
+                          <SelectItem value="salads">Salads</SelectItem>
+                          <SelectItem value="main dishs">
+                            Main dishes
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="ingredients"
+                render={({ field }) => (
+                  <FormItem className="mb-6">
+                    <FormLabel className=" w-full absolute left-0">
+                      Ingredients
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        className="resize-none break-all h-30 w-[288px]"
+                        placeholder="Ingredients here..."
+                        {...field}
                       />
-                      {field.value && (
-                        <div className="absolute w-full h-full top-0 left-0 rounded-xl overflow-hidden">
-                          <Image
-                            src={URL.createObjectURL(field.value)}
-                            alt="image"
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      )}
-                      <div className="w-full h-40 rounded-xl border border-dashed border-[#2563EB33] flex justify-center items-center bg-[#2563EB0D]">
-                        <div className="flex flex-col items-center gap-2">
-                          <div className="w-9 h-9 rounded-full flex justify-center items-center bg-white">
-                            <ImageIcon className="text-black" />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem className="mb-6">
+                    <FormLabel className=" w-full absolute left-0">
+                      Price
+                    </FormLabel>
+                    <FormControl className="w-[288px]">
+                      <Input placeholder="Price here..." {...field} />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="image"
+                render={({ field }) => (
+                  <FormItem className="mb-6">
+                    <FormLabel className=" w-full absolute left-0">
+                      Image
+                    </FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          type="file"
+                          placeholder="Image file"
+                          className="absolute w-full h-full top-0 left-0 opacity-0 z-10 cursor-pointer"
+                          onChange={(e) => {
+                            const files = e.target.files;
+                            if (!files) return;
+                            const [file] = files;
+                            field.onChange(file);
+                          }}
+                        />
+                        {field.value && (
+                          <div className="absolute w-full h-full top-0 left-0 rounded-xl overflow-hidden">
+                            <Image
+                              src={URL.createObjectURL(field.value)}
+                              alt="image"
+                              fill
+                              className="object-cover"
+                            />
                           </div>
-                          Choose a file or drag & drop it here
+                        )}
+                        <div className="  aspect-[288/116] h-[116px] rounded-xl border border-dashed border-[#2563EB33] flex justify-center items-center bg-[#2563EB0D]">
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-9 h-9 rounded-full  border flex justify-center items-center bg-white">
+                              <ImageIcon className=" w-4 h-4 text-black" />
+                            </div>
+                            <p className="font-normal text-sm">
+                              Choose a file or drag & drop it here
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </FormControl>
-                  <FormDescription></FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    </FormControl>
+                    <FormDescription></FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <div className=" flex justify-between">
               <Button
-                type="submit"
+                onClick={() => {
+                  form.reset();
+                  console.clear();
+                }}
+                type="button"
                 variant={"outline"}
                 className="w-9 h-9 border border-red-600"
               >
                 <Trash className="w-4 h-4 text-red-600" />
               </Button>
-              <Button type="submit">Submit</Button>
+              <Button variant={"default"} type="submit">
+                Save changes
+              </Button>
             </div>
           </form>
         </Form>

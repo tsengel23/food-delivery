@@ -33,13 +33,13 @@ export const UserStatus = () => {
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem className="border w-fit h-hit p-0 rounded-full my-3">
           <Button
             onClick={() => {
               router.replace("/login");
             }}
             variant={"outline"}
-            className="mt-2 rounded-full overflow-hidden"
+            className=" rounded-full overflow-hidden border border-red-200"
           >
             Sign out
           </Button>
