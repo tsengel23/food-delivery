@@ -68,15 +68,15 @@ export const AddNewCategoryButton = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className=" flex flex-col"
+            className=" flex flex-col items-end "
           >
             <FormField
               control={form.control}
               name="categoryName"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="w-full">
                   <FormLabel className="">Category name</FormLabel>
-                  <FormControl>
+                  <FormControl className=" ">
                     <Input placeholder="Type category name..." {...field} />
                   </FormControl>
                   <FormDescription></FormDescription>
@@ -84,7 +84,7 @@ export const AddNewCategoryButton = () => {
                 </FormItem>
               )}
             />
-            <Button variant={"default"} type="submit" className="mt-10  w-30">
+            <Button variant={"default"} type="submit" className="mt-10 ">
               Add category
             </Button>
           </form>

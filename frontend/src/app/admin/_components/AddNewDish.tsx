@@ -257,19 +257,21 @@ export const AddNewDish = ({ title }: AddNewDish) => {
 
   return (
     <Dialog>
-      <div className="flex flex-col gap-6 items-center">
-        <DialogTrigger asChild>
-          <Button
-            type="button"
-            variant={"destructive"}
-            className="w-9 h-9 bg-[#EF4444] flex justify-center items-center rounded-full"
-          >
-            <Plus className="w-4 h-4 text-white" />
-          </Button>
-        </DialogTrigger>
-        <p className="w-[154px] text-center text-[#18181B] text-sm font-medium">
-          Add new Dish to <span>{title}</span>
-        </p>
+      <div className="border border-dashed border-[#EF4444] rounded-xl flex justify-center items-center aspect-[270/241] h-[241px] ">
+        <div className="flex flex-col gap-6 items-center">
+          <DialogTrigger asChild>
+            <Button
+              type="button"
+              variant={"destructive"}
+              className="w-9 h-9 bg-[#EF4444] flex justify-center items-center rounded-full"
+            >
+              <Plus className="w-4 h-4 text-white" />
+            </Button>
+          </DialogTrigger>
+          <p className="w-[154px] text-center text-[#18181B] text-sm font-medium">
+            Add new Dish to <span>{title}</span>
+          </p>
+        </div>
       </div>
 
       <DialogContent className="flex flex-col [&>button]:hidden ">

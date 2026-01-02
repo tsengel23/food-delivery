@@ -3,28 +3,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 type CategoryPill = {
-  id: string;
   name: string;
   count: number;
   active: boolean;
-  onSelect: (id: string) => void;
 };
 
-export const CategoryPill = ({
-  id,
-  name,
-  count,
-  active,
-  onSelect,
-}: CategoryPill) => {
+export const CategoryPill = ({ name, count, active }: CategoryPill) => {
   return (
-    <Button
-      variant={active ? "default" : "outline"}
-      className="rounded-full"
-      onClick={() => onSelect(id)}
-    >
+    <Button variant={active ? "default" : "outline"} className="rounded-full">
       {name}
-      <Badge>{count}</Badge>
+      <Badge className={active ? "bg-white text-black" : "bg-black text-white"}>
+        {count}
+      </Badge>
     </Button>
   );
 };

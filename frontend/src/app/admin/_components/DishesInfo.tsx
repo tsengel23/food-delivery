@@ -72,7 +72,7 @@ export const DishesInfo = () => {
             variant={"default"}
             className="w-9 h-9 bg-white flex justify-center items-center rounded-full border"
           >
-            <Pencil className="w-4 h-4 text-[#EF4444]" />
+            <Pencil className="w-4 h-4 text-[#EF4444]" strokeWidth={2} />
           </Button>
         </DialogTrigger>
       </div>

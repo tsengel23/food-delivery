@@ -138,7 +138,7 @@ const foods = [
   },
 ];
 
-export const CategoryBar = () => {
+export const FoodMenuSection = () => {
   return (
     <div className="w-full  bg-white border rounded-xl p-6 flex flex-col gap-4  ">
       <h1>Dishes category</h1>

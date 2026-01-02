@@ -5,16 +5,18 @@ import { DishesInfo } from "./_components/DishesInfo";
 import { AdminFoodMenu } from "./_components/AdminFoodMenu";
 import { CategoryPill } from "./_components/CategoryPill";
 import { ImageUpload } from "./_components/ImageUpload";
+import { CategoryBar } from "./_components/CategoryBar";
 
 export default function AdminPage() {
   return (
-    <div className="w-300 h-300 border-3 border-red-500 p-6 ml-[205px] bg-gray-50 ">
-      {/* <CategoryBar categories={} /> */}
-      <AddCategoryButton />
+    <div className="w-350 h-300 border-3 border-red-500 p-6  bg-gray-50 ">
+      <CategoryBar />
+
       {/* <AddNewCategoryButton /> */}
       {/* <DishesInfo /> */}
-      <ImageUpload />
+
       {/* <AddNewDish title={"salads"} /> */}
+      {/* <CategoryPill name={"buuuz"} count={12} active={true} /> */}
     </div>
   );
 }
