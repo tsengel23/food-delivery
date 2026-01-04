@@ -1,159 +1,92 @@
-import { CategoryPill } from "./CategoryPill";
+import { title } from "process";
+import { AddNewDish } from "./AddNewDish";
+import { FoodMenuCard } from "./FoodMenuCard";
 
-const foods = [
+const appetizers = [
   {
-    name: "buuz",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "buuz",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "bantan",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "buuz",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "huushuur",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "buuz",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "tsuivan",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "buuz",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
+    image: "food2.png",
+    title: "Brie Crostini Appetizer",
+    price: 12,
+    overview:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
 ];
 
 export const FoodMenuSection = () => {
   return (
-    <div className="w-full  bg-white border rounded-xl p-6 flex flex-col gap-4  ">
-      <h1>Dishes category</h1>
-      <div className="flex flex-wrap  gap-3">
-        {foods.map((item, index) => {
+    <div className="w-full bg-white border rounded-xl p-5 flex flex-col gap-4  ">
+      <h1 className="text-[#09090B] font-semibold text-xl">
+        {"Appetizers"}(<span>{appetizers.length}</span>)
+      </h1>
+      <div className="flex flex-wrap gap-3 w-fit">
+        <AddNewDish title={"Appetizers"} />
+        {appetizers.map((item, index) => {
           return (
-            <CategoryPill
+            <FoodMenuCard
               key={index}
-              name={item.name}
-              count={item.count}
-              active={item.active}
+              image={item.image}
+              title={item.title}
+              price={item.price}
+              overview={item.overview}
             />
           );
         })}
-        {/* // <CategoryPill name={"buuuz"} count={12} active={true} /> */}
       </div>
     </div>
   );

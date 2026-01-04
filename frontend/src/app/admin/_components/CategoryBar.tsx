@@ -1,20 +1,20 @@
 import { CategoryPill } from "./CategoryPill";
-
+import { AddNewCategoryButton } from "./AddNewCategoryButton";
 const foods = [
   {
     name: "buuz",
-    count: 1,
-    active: false,
+    count: 112,
+    active: true,
   },
   {
     name: "buuz",
-    count: 1,
+    count: 112,
     active: false,
   },
   {
     name: "bantan",
     count: 1,
-    active: false,
+    active: true,
   },
   {
     name: "buuz",
@@ -81,68 +81,13 @@ const foods = [
     count: 1,
     active: false,
   },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
-  {
-    name: "buuz",
-    count: 1,
-    active: false,
-  },
 ];
 
 export const CategoryBar = () => {
   return (
-    <div className="w-full  bg-white border rounded-xl p-6 flex flex-col gap-4  ">
-      <h1>Dishes category</h1>
-      <div className="flex flex-wrap  gap-3">
+    <div className="w-full bg-white border rounded-xl p-6 flex flex-col gap-4  ">
+      <h1 className="text-[#09090B] font-semibold text-xl">Dishes category</h1>
+      <div className="flex flex-wrap gap-3 w-fit">
         {foods.map((item, index) => {
           return (
             <CategoryPill
@@ -153,7 +98,7 @@ export const CategoryBar = () => {
             />
           );
         })}
-        {/* // <CategoryPill name={"buuuz"} count={12} active={true} /> */}
+        <AddNewCategoryButton />
       </div>
     </div>
   );

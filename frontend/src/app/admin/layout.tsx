@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <div className="flex w-full">
       <AdminNavbar />
-      <div className="w-full bg-secondary p-6 pr-10">
+      <div className="w-full bg-secondary p-6 ">
         <AdminAvatar />
         {children}
       </div>

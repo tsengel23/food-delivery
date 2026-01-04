@@ -257,7 +257,7 @@ export const AddNewDish = ({ title }: AddNewDish) => {
 
   return (
     <Dialog>
-      <div className="border border-dashed border-[#EF4444] rounded-xl flex justify-center items-center aspect-[270/241] h-[241px] ">
+      <div className="border border-dashed  border-[#EF4444] rounded-xl flex justify-center items-center aspect-[370/241] h-[241px] ">
         <div className="flex flex-col gap-6 items-center">
           <DialogTrigger asChild>
             <Button

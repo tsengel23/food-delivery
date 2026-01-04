@@ -17,9 +17,10 @@ const AdminNavbar = () => {
       </Link>
       <div className="flex flex-col gap-6 mt-10 mx-5 justify-between">
         {/*  */}
-        <Link href="/admin/food-menu">
+
+        <Link href="/admin">
           <Button
-            variant={pathname === "/admin/food-menu" ? "default" : "outline"}
+            variant={pathname === "/admin" ? "default" : "outline"}
             className="rounded-full w-[165]"
           >
             <div className="flex gap-2 ml-6">
