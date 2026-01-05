@@ -25,6 +25,7 @@ import { MyCartFood } from "../MyCartFood";
 import { useState } from "react";
 import { CartAndOrder } from "./CartAndOrder";
 import { Badge } from "@/components/ui/badge";
+import { PaymentInfo } from "./PaymentInfo";
 
 const foods = [
   {
@@ -142,7 +143,8 @@ export const Order = ({ totalItems }: OrderProps) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col rounded-xl p-4 bg-white rounded-xl gap-2 mb-8">
+            <PaymentInfo />
+            {/* <div className="flex flex-col rounded-xl p-4 bg-white rounded-xl gap-2 mb-8">
               <h1 className="text-[#71717A] text-xl  font-semibold">
                 Payment info
               </h1>
@@ -168,7 +170,7 @@ export const Order = ({ totalItems }: OrderProps) => {
               >
                 Checkout
               </Button>
-            </div>
+            </div> */}
           </TabsContent>
           <TabsContent
             value="order"
