@@ -26,6 +26,7 @@ import { useState } from "react";
 import { CartAndOrder } from "./CartAndOrder";
 import { Badge } from "@/components/ui/badge";
 import { PaymentInfo } from "./PaymentInfo";
+import { CartContentDeliveryLocation } from "./CartContentDeliveryLocation";
 
 const foods = [
   {
@@ -58,11 +59,11 @@ const foods = [
   },
 ];
 
-type OrderProps = {
-  totalItems: number;
-};
+// type OrderProps = {
+//   totalItems: number;
+// };
 
-export const Order = ({ totalItems }: OrderProps) => {
+export const Order = () => {
   // const totalItems = useState(0);
   return (
     <Sheet>
@@ -73,11 +74,11 @@ export const Order = ({ totalItems }: OrderProps) => {
         >
           <ShoppingCart className="w-4 h-4" />
           {/*  */}
-          {totalItems > 0 && (
+          {/* {totalItems > 0 && (
             <span className="absolute -top-1 -right-1 bg-white text-red-500 text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-sm">
               {totalItems}
             </span>
-          )}
+          )} */}
           {/*  */}
         </Button>
       </SheetTrigger>
@@ -132,8 +133,8 @@ export const Order = ({ totalItems }: OrderProps) => {
                   text={`Hungry? 🍔 Add some delicious dishes to your cart and satisfy your cravings!`}
                 /> */}
               </div>
-
-              <div className="mt-12 flex flex-col gap-2">
+              <CartContentDeliveryLocation />
+              {/* <div className="mt-12 flex flex-col gap-2">
                 <h1 className="text-[#71717A] text-xl  font-semibold">
                   Delivery location
                 </h1>
@@ -141,7 +142,7 @@ export const Order = ({ totalItems }: OrderProps) => {
                   placeholder="Please share your complete address"
                   className="h-20 resize-none text-[#71717A] text-sm  font-normal"
                 />
-              </div>
+              </div> */}
             </div>
             <PaymentInfo />
             {/* <div className="flex flex-col rounded-xl p-4 bg-white rounded-xl gap-2 mb-8">

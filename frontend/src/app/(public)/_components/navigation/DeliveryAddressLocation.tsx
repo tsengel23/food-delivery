@@ -80,7 +80,7 @@ export const DeliveryAddressLocation = () => {
                   <FormControl>
                     <Textarea
                       placeholder="Please share your complete address"
-                      className="resize-none h-20 w-ful break-all overflow-y-hidden"
+                      className="resize-none h-20 w-full break-all overflow-y-hidden"
                       {...field}
                     />
                     {/* <Input placeholder="shadcn" {...field} /> */}
