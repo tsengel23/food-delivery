@@ -1,0 +1,20 @@
+Controller руу муу data орохоос хамгаална
+✅ Зөв практик
+
+Frontend дээр Zod → OK
+Backend дээр src/validators/category.validator.ts → заавал
+
+
+
+🚫 Болохгүй хувилбар
+“Frontend шалгасан юм чинь backend хэрэггүй” ❌
+
+
+🟢 Товч дүгнэлт
+
+👉 Тийм, backend validator тусдаа хэрэгтэй.
+Давхардал биш, давхар хамгаалалт 🛡️
+
+
+Validator = зөвхөн req.body шалгана
+GET / DELETE → validator хэрэггүй 👍

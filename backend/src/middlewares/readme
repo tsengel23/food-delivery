@@ -1,0 +1,9 @@
+src/middlewares/
+├─ error-handler.ts     // global error
+├─ auth.middleware.ts  // JWT шалгах
+├─ role.middleware.ts  // admin / user
+├─ validate.middleware.ts // schema шалгах
+├─ not-found.ts        // 404 handler
+
+
+Middleware = entity-ээс хамаарахгүй, app түвшний логик

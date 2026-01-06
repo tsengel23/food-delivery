@@ -1,0 +1,13 @@
+❓ Route гэж юу вэ? 🚪
+
+👉 Route = URL + HTTP method
+👉 аль controller ажиллахыг заана
+
+🧠 Route-ын үүрэг
+
+/categories дуудагдвал → ямар function ажиллах вэ?
+
+GET /categories/:id → ямар controller вэ?
+
+👉 Route өөрөө логик хийхгүй ❌
+👉 Зөвхөн холбож өгнө 🔗

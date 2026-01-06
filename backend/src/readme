@@ -1,0 +1,220 @@
+Router бүр = API-ийн нэг хаалга 🚪
+Тиймээс бүгдийг нь хийх ёстой 👍
+
+
+
+# 🧭 1️⃣ ЭХЛЭЭД: `src/` ДООР ИНГЭЖ БАЙХ ЁСТОЙ
+
+```
+src/
+├─ app.ts
+├─ database/
+├─ controllers/
+├─ routes/
+├─ services/
+├─ validators/
+└─ middlewares/
+```
+
+---
+
+# 🧱 2️⃣ DATABASE SCHEMA (АЛЬ ХЭДИЙН БАЙГАА)
+
+📁 **`src/database/schema/`**
+
+```
+category.schema.ts
+food.schema.ts
+user.schema.ts
+order.schema.ts
+```
+
+👉 **ЭНД ЮУ БИЧДЭГ ВЭ?**
+➡️ MongoDB-д хадгалах бүтэц
+❌ Өөр юм бичихгүй
+
+---
+
+# 🧪 3️⃣ VALIDATORS (ЧИ ОДОО ХИЙЖ БАЙГАА ХЭСЭГ)
+
+📁 **`src/validators/`**
+👉 **ЭНД 4 ФАЙЛ БАЙХ ЁСТОЙ**
+
+```
+category.validator.ts
+food.validator.ts
+user.validator.ts
+order.validator.ts
+```
+
+### 📄 `category.validator.ts`
+
+```ts
+import { z } from "zod";
+
+export const createCategorySchema = z.object({
+  name: z.string().min(1),
+});
+
+export const updateCategorySchema = z.object({
+  name: z.string().min(1),
+});
+```
+
+👉 **ЭНД ЮУ БИЧДЭГ ВЭ?**
+➡️ `req.body` шалгалт
+❌ DB ❌ res ❌ logic
+
+---
+
+# ⚙️ 4️⃣ SERVICES (DATABASE-ТЭЙ ЯРИХ ГАЗАР)
+
+📁 **`src/services/`**
+
+```
+category.service.ts
+food.service.ts
+user.service.ts
+order.service.ts
+```
+
+### 📄 `category.service.ts`
+
+```ts
+import { CategoryModel } from "../database/schema/category.schema.js";
+
+export const createCategoryService = async (name: string) =>
+  CategoryModel.create({ name });
+
+export const getCategoryService = async (id: string) =>
+  CategoryModel.findById(id);
+
+export const getCategoriesService = async () =>
+  CategoryModel.find();
+
+export const updateCategoryService = async (id: string, name: string) =>
+  CategoryModel.findByIdAndUpdate(id, { name }, { new: true });
+
+export const deleteCategoryService = async (id: string) =>
+  CategoryModel.findByIdAndDelete(id);
+```
+
+👉 **ЭНД ЮУ БИЧДЭГ ВЭ?**
+➡️ Database logic
+❌ req ❌ res ❌ validation
+
+---
+
+# 🧠 5️⃣ CONTROLLERS (REQUEST / RESPONSE)
+
+📁 **`src/controllers/category/`**
+
+```
+create-category.ts
+get-category.ts
+get-categories.ts
+update-category.ts
+delete-category.ts
+index.ts
+```
+
+### 📄 `create-category.ts`
+
+```ts
+import type { RequestHandler } from "express";
+import { createCategorySchema } from "../../validators/category.validator.js";
+import { createCategoryService } from "../../services/category.service.js";
+
+export const createCategory: RequestHandler = async (req, res, next) => {
+  try {
+    const parsed = createCategorySchema.parse(req.body);
+    const category = await createCategoryService(parsed.name);
+    res.status(201).json(category);
+  } catch (e) {
+    next(e);
+  }
+};
+```
+
+👉 **ЭНД ЮУ БИЧДЭГ ВЭ?**
+➡️ req авах
+➡️ validator дуудах
+➡️ service дуудах
+➡️ res буцаах
+
+---
+
+# 🚪 6️⃣ ROUTES (URL ХОЛБОГЧ)
+
+📁 **`src/routes/`**
+
+### 📄 `category.router.ts`
+
+```ts
+import { Router } from "express";
+import * as c from "../controllers/category/index.js";
+
+const router = Router();
+
+router.post("/", c.createCategory);
+router.get("/", c.getCategories);
+router.get("/:id", c.getCategory);
+router.put("/:id", c.updateCategory);
+router.delete("/:id", c.deleteCategory);
+
+export default router;
+```
+
+👉 **ЭНД ЮУ БИЧДЭГ ВЭ?**
+➡️ URL → аль controller вэ
+❌ logic ❌ DB
+
+---
+
+# 🚨 7️⃣ MIDDLEWARE (ERROR)
+
+📁 **`src/middlewares/`**
+
+### 📄 `error-handler.ts`
+
+```ts
+import type { ErrorRequestHandler } from "express";
+import { ZodError } from "zod";
+
+export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  if (err instanceof ZodError) {
+    return res.status(400).json({ errors: err.issues });
+  }
+  res.status(500).json({ message: "Server error" });
+};
+```
+
+---
+
+# 🧩 8️⃣ `app.ts` ДЭЭР ЗААВАЛ ЭНЭ БАЙХ ЁСТОЙ
+
+📄 **`src/app.ts`**
+
+```ts
+import categoryRouter from "./routes/category.router.js";
+import { errorHandler } from "./middlewares/error-handler.js";
+
+app.use("/categories", categoryRouter);
+
+// 🔴 ХАМГИЙН СҮҮЛД
+app.use(errorHandler);
+```
+
+---
+
+# 🧠 ЭЦСИЙН 1 МӨР (ҮҮНИЙГ Л ЦЭЭЖИЛ)
+
+> **schema = DB**
+> **validator = body**
+> **service = DB logic**
+> **controller = req/res**
+> **route = URL**
+> **middleware = нийт app**
+
+Хэрвээ одоо ч ойлгомжгүй байвал **ямар файл дээр, аль мөр дээр гацсанаа нэрлэ**.
+ТЭР НЭГ ЦЭГИЙГ Л задлаад өгье.

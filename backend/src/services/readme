@@ -1,0 +1,30 @@
+2️⃣ Service layer салгах 🧠
+
+👉 Controller = request/response
+👉 Service = business logic
+
+
+💡 Одоо controller database мэдэхгүй
+👉 database logic = service 🧠
+
+1️⃣ Service layer салгасны ашиг 🧠
+
+👉 Controller
+
+request авна
+
+response буцаана
+
+👉 Service
+
+database-тэй ажиллана
+
+бодит логик агуулна
+
+Ашиг:
+
+код цэгцтэй 🧹
+
+давтан ашиглах боломжтой 🔁
+
+controller хэт тархитай болохгүй ❌🧠

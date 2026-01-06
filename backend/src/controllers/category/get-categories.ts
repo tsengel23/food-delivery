@@ -9,3 +9,14 @@ export const getCategories: RequestHandler = async (req, res) => {
 
   res.status(200).json(categories);
 };
+
+// try catch error handler-tai shinechilsen huvilbar!!!!!!
+//
+// export const getCategories: RequestHandler = async (req, res, next) => {
+//   try {
+//     const categories = await getCategoriesService();
+//     res.json(categories);
+//   } catch (e) {
+//     next(e);
+//   }
+// };
