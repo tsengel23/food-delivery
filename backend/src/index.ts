@@ -7,6 +7,12 @@ import cors from "cors";
 await connectToDatabase();
 
 const app = express();
+//
+app.use((req, res, next) => {
+  console.log("➡️ HIT:", req.method, req.url);
+  next();
+});
+//
 
 app.use(cors());
 

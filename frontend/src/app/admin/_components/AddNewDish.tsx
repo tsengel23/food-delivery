@@ -206,7 +206,7 @@ import {
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { positive, z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -226,11 +226,12 @@ import { ImageIcon, Plus, X } from "lucide-react";
 
 const formSchema = z.object({
   foodName: z.string(),
+  // foodPrice: z.coerce.number().min(0, "Price cannot be negative"),
   foodPrice: z.string(),
 
-  foodRecepies: z.string(),
-  // foodImage: z.file("file upload ?!").optional(),
+  foodRecepies: z.string().min(1, "Ingredients required"),
   foodImage: z.instanceof(File).optional(),
+  // foodImage: z.file("file upload ?!").optional(),
 });
 
 type AddNewDish = {
@@ -315,6 +316,8 @@ export const AddNewDish = ({ title }: AddNewDish) => {
                     <FormControl>
                       <Input
                         type="number"
+                        min={0}
+                        step={0.01}
                         placeholder="Enter price..."
                         {...field}
                         // value={field.value || ""}

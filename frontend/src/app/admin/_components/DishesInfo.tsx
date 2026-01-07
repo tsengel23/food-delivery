@@ -35,6 +35,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { assert } from "console";
+import { api } from "@/lib/axios";
 
 const formSchema = z.object({
   dishesName: z.string(),
@@ -44,7 +47,13 @@ const formSchema = z.object({
   image: z.instanceof(File).optional(),
 });
 
+type Category = {
+  _id: string;
+  name: string;
+};
+
 export const DishesInfo = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,13 +65,19 @@ export const DishesInfo = () => {
     },
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
 
+  //
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await api.get<Category[]>("/categories");
+      setCategories(data);
+    };
+    fetchCategories();
+  }, []);
+  //
   return (
     <Dialog>
       <div className="flex flex-col gap-6 items-center">
@@ -119,17 +134,26 @@ export const DishesInfo = () => {
                     </FormLabel>
                     <FormControl>
                       {/* <Input placeholder="Category here..." {...field} /> */}
-                      <Select {...field} onValueChange={field.onChange}>
+                      <Select
+                        {...field}
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <SelectTrigger className="w-[288px]">
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="appetizer">Appetizers</SelectItem>
+                          {/* {categories.map((category) => {
+                            <SelectItem key={category._id} value={category._id}>
+                              {category.name}
+                            </SelectItem>;
+                          })} */}
+                          {/* <SelectItem value="appetizer">Appetizers</SelectItem>
                           <SelectItem value="pizzas">Pizzas</SelectItem>
                           <SelectItem value="salads">Salads</SelectItem>
                           <SelectItem value="main dishs">
                             Main dishes
-                          </SelectItem>
+                          </SelectItem> */}
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -167,7 +191,13 @@ export const DishesInfo = () => {
                       Price
                     </FormLabel>
                     <FormControl className="w-[288px]">
-                      <Input placeholder="Price here..." {...field} />
+                      <Input
+                        type="number"
+                        min={0}
+                        step={0.01}
+                        placeholder="Price here..."
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription></FormDescription>
                     <FormMessage />
