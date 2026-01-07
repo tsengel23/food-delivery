@@ -7,11 +7,9 @@ import { getCategory } from "../controllers/category/get-category.js";
 
 const CategoryRouter = Router();
 
-CategoryRouter.get("/", getCategories).post("/create", createCategory);
-CategoryRouter.get("/", getCategories).post("/create", createCategory);
-CategoryRouter.get("/", getCategories).post("/create", createCategory);
-CategoryRouter.get("/", getCategories).post("/create", createCategory);
-CategoryRouter.get("/", getCategories).post("/create", createCategory);
+CategoryRouter.get("/", getCategories)
+  .post("/create", createCategory)
+  .delete("/:id", deleteCategory);
 
 export { CategoryRouter };
 
