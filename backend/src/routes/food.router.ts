@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getFoods } from "../controllers/food/get-foods.js";
 import { createFoods } from "../controllers/food/create-food.js";
+import { getFoodsByCategoryId } from "../controllers/food/get-foods-by-category-id.js";
 
 const FoodRouter = Router();
 //
@@ -10,6 +11,8 @@ const FoodRouter = Router();
 
 //
 
-FoodRouter.get("/", getFoods).post("/create", createFoods);
+FoodRouter.get("/", getFoods)
+  .post("/create", createFoods)
+  .get("/category/:categoryId", getFoodsByCategoryId);
 
 export default FoodRouter;

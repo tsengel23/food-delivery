@@ -47,13 +47,13 @@ const formSchema = z.object({
   image: z.instanceof(File).optional(),
 });
 
-type Category = {
-  _id: string;
-  name: string;
-};
+// type category = {
+//   _id: string;
+//   name: string;
+// };
 
 export const DishesInfo = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<category[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,7 +72,7 @@ export const DishesInfo = () => {
   //
   useEffect(() => {
     const fetchCategories = async () => {
-      const { data } = await api.get<Category[]>("/categories");
+      const { data } = await api.get<category[]>("/categories");
       setCategories(data);
     };
     fetchCategories();
@@ -143,11 +143,16 @@ export const DishesInfo = () => {
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                         <SelectContent>
-                          {/* {categories.map((category) => {
-                            <SelectItem key={category._id} value={category._id}>
-                              {category.name}
-                            </SelectItem>;
-                          })} */}
+                          {categories.map((category) => {
+                            return (
+                              <SelectItem
+                                key={category._id}
+                                value={category._id}
+                              >
+                                {category.name}
+                              </SelectItem>
+                            );
+                          })}
                           {/* <SelectItem value="appetizer">Appetizers</SelectItem>
                           <SelectItem value="pizzas">Pizzas</SelectItem>
                           <SelectItem value="salads">Salads</SelectItem>

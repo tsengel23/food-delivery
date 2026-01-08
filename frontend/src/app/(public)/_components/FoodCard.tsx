@@ -23,7 +23,7 @@ export interface FoodItem {
   image: string;
 }
 interface FoodCardProps {
-  item: FoodItem;
+  item: food;
   // onClick: (item: FoodItem) => void;
   onClose: () => void;
   onAddToCart: (item: FoodItem, quantity: number) => void;
@@ -33,18 +33,12 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
   const [selected, setSelected] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
-  const getTotalPrice = () => {
-    if (!item) return "$0.00";
-    const price = parseFloat(item.price.replace("$", ""));
-    return `$${(price * quantity).toFixed(2)}`;
-  };
-
-  const handleAddToCart = () => {
-    if (item) {
-      onAddToCart(item, quantity);
-      setQuantity(1);
-    }
-  };
+  // const handleAddToCart = () => {
+  //   if (item) {
+  //     onAddToCart(item, quantity);
+  //     setQuantity(1);
+  //   }
+  // };
 
   return (
     <div className="relative">
@@ -67,7 +61,7 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
               </p>
             </div>
             <p className="text-[#09090B] text-sm font-normal mt-2">
-              {item.description}
+              {item.ingredients}
             </p>
           </div>
         </div>
@@ -88,7 +82,7 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
                   <h1 className="text-3xl text-[#EF4444] font-semibold">
                     {item.name}
                   </h1>
-                  <p className="text-base">{item.description}</p>
+                  <p className="text-base">{item.ingredients}</p>
                 </div>
                 <div className="border border-blue-500 flex flex-col gap-6 ">
                   <div className="flex justify-between border">
@@ -97,7 +91,7 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
                         Total price
                       </p>
                       <p className="text-[#09090B] text-2xl font-semibold">
-                        <span>{getTotalPrice()}</span>
+                        {/* <span>{getTotalPrice()}</span> */}
                       </p>
                     </div>
                     <div className="flex gap-3 items-center">
@@ -125,7 +119,7 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
                     </div>
                   </div>
                   <Button
-                    onClick={handleAddToCart}
+                    // onClick={handleAddToCart}
                     className="rounded-full py-2"
                   >
                     Add to cart
