@@ -3,7 +3,7 @@ import { PaymentInfo } from "@/app/(public)/_components/navigation/PaymentInfo";
 import { AddNewCategoryButton } from "../_components/AddNewCategoryButton";
 import { AddNewDish } from "../_components/AddNewDish";
 import { AdminFoodMenu } from "../_components/AdminFoodMenu";
-import { CategoryPill } from "../_components/CategoryPill";
+import { CategoryPill } from "../../(public)/_components/CategoryPill";
 import { DishesInfo } from "../_components/DishesInfo";
 import { FoodMenuCard } from "../_components/FoodMenuCard";
 import { CartContentDeliveryLocation } from "@/app/(public)/_components/navigation/CartContentDeliveryLocation";

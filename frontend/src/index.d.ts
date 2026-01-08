@@ -15,4 +15,5 @@ type food = {
 type category = {
   _id: string;
   name: string;
+  // foodCount: number;
 };

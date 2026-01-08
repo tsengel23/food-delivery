@@ -44,9 +44,9 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
     <div className="relative">
       <Dialog>
         <div className="flex flex-col gap-5 p-4 rounded-2xl bg-white border border-red-500">
-          <div className="border border-green-500 rounded-xl relative aspect-[365/210] w-full overflow-hidden">
+          <div className="border border-green-500 rounded-xl relative aspect-[365/210] w-full overflow-hidden group">
             <img
-              className="absolute inset-0 w-full h-full object-cover rounded-xl"
+              className="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
               src={item.image}
               alt={item.name}
             />
@@ -57,7 +57,7 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
                 {item.name}
               </h1>
               <p className="text-[#09090B] text-lg font-semibold">
-                <span>{item.price}</span>
+                $<span>{item.price}</span>
               </p>
             </div>
             <p className="text-[#09090B] text-sm font-normal mt-2">
