@@ -194,20 +194,9 @@ import { api } from "@/lib/axios";
 //   },
 // ];
 
-type CategoryBarProps = {
-  // categoryName: string;
-  categoryId: string;
-};
-
-type category = {
-  _id: string;
-  name: string;
-  foodCount: number;
-};
-
-export const CategoryBar = ({ categoryId }: CategoryBarProps) => {
+export const CategoryBar = () => {
   const [categories, setCategories] = useState<category[]>([]);
-  //
+
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await api.get<category[]>(`/categories`);
@@ -215,21 +204,13 @@ export const CategoryBar = ({ categoryId }: CategoryBarProps) => {
     };
     fetchCategories();
   }, []);
-  //
 
   return (
     <div className="w-full bg-white border rounded-xl p-6 flex flex-col gap-4  ">
       <h1 className="text-[#09090B] font-semibold text-xl">Dishes category</h1>
       <div className="flex flex-wrap gap-3 w-fit">
-        {categories?.map((item, index) => {
-          return (
-            <CategoryPill
-              key={index}
-              categoryName={item.name}
-              count={item.foodCount}
-              active={item._id === categoryId}
-            />
-          );
+        {categories?.map((item) => {
+          return <CategoryPill key={item._id} category={item} />;
         })}
         <AddNewCategoryButton />
       </div>

@@ -32,7 +32,13 @@ export default function Home() {
       {/* <OpenAuthDialog /> */}
       <div className="">
         {categories?.map((el) => {
-          return <FoodSection categoryId={el._id} categoryName={el.name} />;
+          return (
+            <FoodSection
+              key={el._id}
+              categoryId={el._id}
+              categoryName={el.name}
+            />
+          );
         })}
       </div>
     </div>
