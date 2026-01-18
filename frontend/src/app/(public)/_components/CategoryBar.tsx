@@ -194,7 +194,10 @@ import { api } from "@/lib/axios";
 //   },
 // ];
 
-export const CategoryBar = () => {
+type CategotyBar = {
+  categoryId: string;
+};
+export const CategoryBar = ({ categoryId }: CategotyBar) => {
   const [categories, setCategories] = useState<category[]>([]);
 
   useEffect(() => {

@@ -105,7 +105,7 @@ export const DishesInfo = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className=" border-red-500"
+            className=" border border-red-500"
           >
             <div className="flex flex-col items-end relative border-blue-500">
               <FormField
