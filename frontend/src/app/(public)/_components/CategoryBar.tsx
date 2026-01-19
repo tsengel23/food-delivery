@@ -110,6 +110,7 @@ import { CategoryPill } from "./CategoryPill";
 import { AddNewCategoryButton } from "../../admin/_components/AddNewCategoryButton";
 import { useEffect, useState } from "react";
 import { api } from "@/lib/axios";
+import { CategoryPillAll } from "./CategoryPillAll";
 
 // const foods = [
 //   {
@@ -212,6 +213,7 @@ export const CategoryBar = ({ categoryId }: CategotyBar) => {
     <div className="w-full bg-white border rounded-xl p-6 flex flex-col gap-4  ">
       <h1 className="text-[#09090B] font-semibold text-xl">Dishes category</h1>
       <div className="flex flex-wrap gap-3 w-fit">
+        <CategoryPillAll name={"All dishes"} />
         {categories?.map((item) => {
           return <CategoryPill key={item._id} category={item} />;
         })}

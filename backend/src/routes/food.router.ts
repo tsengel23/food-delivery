@@ -16,5 +16,6 @@ FoodRouter.get("/", getFoods)
   .post("/create", createFoods)
   .get("/category/:categoryId", getFoodsByCategoryId)
   .get("/category/count/:categoryId", getFoodCountByCategory);
+// .delete("/category/:categoryId", deleteFoodCountByCateory)
 
 export default FoodRouter;

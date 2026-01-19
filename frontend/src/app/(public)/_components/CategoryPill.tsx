@@ -1,7 +1,19 @@
 "use client";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/axios";
+import { Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type CategoryPillProps = {
@@ -22,16 +34,48 @@ export const CategoryPill = ({ category }: CategoryPillProps) => {
   }, []);
 
   return (
-    <Button
-      // onClick={() => setSelected(true)}
-      variant={"outline"}
-      className={`border-black rounded-full hover:bg-green-100`}
-    >
-      {category.name}
-      <Badge className="bg-black text-white w-fit h-4 flex justify-center items-center">
-        {count}
-      </Badge>
-    </Button>
+    <div className="flex justify-center items-center border rounded-full border-red-500 px-0.5 hover:bg-green-100 hover:border-green-400">
+      <Button
+        // onClick={() => setSelected(true)}
+        variant={"ghost"}
+        className={`border border-white rounded-full hover:bg-green-100 hover:border-green-100 `}
+      >
+        {category.name}
+        <Badge className="bg-black text-white w-fit h-4 flex justify-center items-center hover:bg-white hover:text-black">
+          {count}
+        </Badge>
+      </Button>
+
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button
+            variant="outline"
+            className="w-7 h-7 border border-red-400 rounded-full hover:bg-red-100"
+          >
+            <Trash2 className="w-3 h-3 text-red-400" />
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => {
+                await api.delete(`categories/${category._id}`);
+              }}
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </div>
   );
 };
 

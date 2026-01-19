@@ -84,9 +84,11 @@ export const AddNewCategoryButton = () => {
                 </FormItem>
               )}
             />
-            <Button variant={"default"} type="submit" className="mt-10 ">
-              Add category
-            </Button>
+            <DialogClose asChild>
+              <Button variant={"default"} type="submit" className="mt-10 ">
+                Add category
+              </Button>
+            </DialogClose>
           </form>
         </Form>
       </DialogContent>
