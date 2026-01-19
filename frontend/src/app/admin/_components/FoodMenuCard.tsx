@@ -1,16 +1,16 @@
 import { DishesInfo } from "./DishesInfo";
 
 type FoodMenuCardProps = {
-  title: string;
+  name: string;
   price: number;
-  overview: string;
+  ingredients: string;
   image?: string;
 };
 
 export const FoodMenuCard = ({
-  title,
+  name,
   price,
-  overview,
+  ingredients,
   image,
 }: FoodMenuCardProps) => {
   return (
@@ -45,13 +45,13 @@ export const FoodMenuCard = ({
       </div>
       <div className="flex flex-col gap-3 ">
         <div className="flex w-full justify-between">
-          <h1 className="text-[#EF4444] font-medium text-sm">{title}</h1>
+          <h1 className="text-[#EF4444] font-medium text-sm">{name}</h1>
           <p className="text-[#09090B] font-semibold text-xs">
             ${price.toFixed(2)}
           </p>
         </div>
         <p className="text-[#09090B] font-normal text-xs line-clamp-2">
-          {overview}
+          {ingredients}
         </p>
       </div>
     </div>

@@ -5,65 +5,44 @@ import { FoodMenuCard } from "./FoodMenuCard";
 const appetizers = [
   {
     image: "food2.png",
-    title: "Brie Crostini Appetizer",
+    name: "Brie Crostini Appetizer",
     price: 12,
-    overview:
+    ingredients:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
     image: "food2.png",
-    title: "Brie Crostini Appetizer",
+    name: "Brie Crostini Appetizer",
     price: 12,
-    overview:
+    ingredients:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
     image: "food2.png",
-    title: "Brie Crostini Appetizer",
+    name: "Brie Crostini Appetizer",
     price: 12,
-    overview:
+    ingredients:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
     image: "food2.png",
-    title: "Brie Crostini Appetizer",
+    name: "Brie Crostini Appetizer",
     price: 12,
-    overview:
+    ingredients:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
     image: "food2.png",
-    title: "Brie Crostini Appetizer",
+    name: "Brie Crostini Appetizer",
     price: 12,
-    overview:
+    ingredients:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
   {
     image: "food2.png",
-    title: "Brie Crostini Appetizer",
+    name: "Brie Crostini Appetizer",
     price: 12,
-    overview:
-      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-  },
-  {
-    image: "food2.png",
-    title: "Brie Crostini Appetizer",
-    price: 12,
-    overview:
-      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-  },
-  {
-    image: "food2.png",
-    title: "Brie Crostini Appetizer",
-    price: 12,
-    overview:
-      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-  },
-  {
-    image: "food2.png",
-    title: "Brie Crostini Appetizer",
-    price: 12,
-    overview:
+    ingredients:
       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
   },
 ];
@@ -81,9 +60,9 @@ export const FoodMenuSection = () => {
             <FoodMenuCard
               key={index}
               image={item.image}
-              title={item.title}
+              name={item.name}
               price={item.price}
-              overview={item.overview}
+              ingredients={item.ingredients}
             />
           );
         })}
