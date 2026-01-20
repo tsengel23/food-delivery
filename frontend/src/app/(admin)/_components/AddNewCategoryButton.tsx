@@ -27,11 +27,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { api } from "@/lib/axios";
 const formSchema = z.object({
   categoryName: z.string(),
 });
 
 export const AddNewCategoryButton = () => {
+  // const [categoryList, setCategoryList] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,12 +44,17 @@ export const AddNewCategoryButton = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+
+    await api.post(`/categories/create`, { name: values.categoryName });
+
+    form.reset();
+    setIsOpen(false);
   }
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           type="button"
@@ -84,11 +94,10 @@ export const AddNewCategoryButton = () => {
                 </FormItem>
               )}
             />
-            <DialogClose asChild>
-              <Button variant={"default"} type="submit" className="mt-10 ">
-                Add category
-              </Button>
-            </DialogClose>
+
+            <Button variant={"default"} type="submit" className="mt-10 ">
+              Add category
+            </Button>
           </form>
         </Form>
       </DialogContent>

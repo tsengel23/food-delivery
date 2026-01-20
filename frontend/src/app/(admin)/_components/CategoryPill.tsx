@@ -38,10 +38,10 @@ export const CategoryPill = ({ category }: CategoryPillProps) => {
       <Button
         // onClick={() => setSelected(true)}
         variant={"ghost"}
-        className={`border border-white rounded-full hover:bg-green-100 hover:border-green-100 `}
+        className={`border border-white rounded-full hover:bg-green-100 hover:border-green-100 group`}
       >
         {category.name}
-        <Badge className="bg-black text-white w-fit h-4 flex justify-center items-center hover:bg-white hover:text-black">
+        <Badge className="border border-black bg-black text-white w-fit h-4 flex justify-center items-center group-hover:bg-white group-hover:text-black">
           {count}
         </Badge>
       </Button>

@@ -107,9 +107,9 @@
 
 "use client";
 import { CategoryPill } from "./CategoryPill";
-import { AddNewCategoryButton } from "../../admin/_components/AddNewCategoryButton";
+import { AddNewCategoryButton } from "./AddNewCategoryButton";
 import { useEffect, useState } from "react";
-import { api } from "@/lib/axios";
+import { api } from "../../../lib/axios";
 import { CategoryPillAll } from "./CategoryPillAll";
 
 // const foods = [
@@ -195,10 +195,11 @@ import { CategoryPillAll } from "./CategoryPillAll";
 //   },
 // ];
 
-type CategotyBar = {
-  categoryId: string;
+type CategoryBarProps = {
+  categoryId?: string;
 };
-export const CategoryBar = ({ categoryId }: CategotyBar) => {
+
+export const CategoryBar = ({ categoryId }: CategoryBarProps) => {
   const [categories, setCategories] = useState<category[]>([]);
 
   useEffect(() => {

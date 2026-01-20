@@ -1,4 +1,4 @@
-import { AdminOrders } from "../_components/AdminOrders";
+import { AdminOrders } from "../../_components/AdminOrders";
 
 export default function HomeAdminOrder() {
   return (
