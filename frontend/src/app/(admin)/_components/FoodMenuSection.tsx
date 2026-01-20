@@ -65,7 +65,7 @@ export const FoodMenuSection = ({
       try {
         setLoading(true);
 
-        const url = categoryId ? `/foods?categoryId=${categoryId}` : `/foods`; // all dishes
+        const url = categoryId ? `/foods/category/${categoryId}` : `/foods`; // all dishes
         const { data } = await api.get(url);
         setFoods(data);
       } catch (error) {
