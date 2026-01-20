@@ -18,9 +18,15 @@ import { useEffect, useState } from "react";
 
 type CategoryPillProps = {
   category: category;
+  isActive: boolean;
+  onSelect: () => void;
 };
 
-export const CategoryPill = ({ category }: CategoryPillProps) => {
+export const CategoryPill = ({
+  category,
+  isActive,
+  onSelect,
+}: CategoryPillProps) => {
   // const [selected, setSelected] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -31,12 +37,20 @@ export const CategoryPill = ({ category }: CategoryPillProps) => {
     };
 
     getFoodCount();
-  }, []);
+  }, [category._id]);
 
   return (
-    <div className="flex justify-center items-center border rounded-full border-red-500 px-0.5 hover:bg-green-100 hover:border-green-400">
+    // <div className={["flex justify-center items-center border rounded-full border-red-500 px-0.5 transition hover:bg-green-100 hover:border-green-400",
+    <div
+      className={[
+        "flex justify-center items-center border rounded-full  px-0.5 transition ",
+        isActive
+          ? "bg-green-100 border-green-400"
+          : "border-red-500 hover:bg-green-100 hover:border-green-400",
+      ].join(" ")}
+    >
       <Button
-        // onClick={() => setSelected(true)}
+        onClick={onSelect}
         variant={"ghost"}
         className={`border border-white rounded-full hover:bg-green-100 hover:border-green-100 group`}
       >
@@ -51,16 +65,17 @@ export const CategoryPill = ({ category }: CategoryPillProps) => {
           <Button
             variant="outline"
             className="w-7 h-7 border border-red-400 rounded-full hover:bg-red-100"
+            onClick={(e) => e.stopPropagation()} //  ✅ энэ байхгүй бол delete дарахад pill select болчихдог
           >
             <Trash2 className="w-3 h-3 text-red-400" />
           </Button>
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent onClick={(e) => e.stopPropagation()}>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>Та үнэхээр итгэлтэй байна уу?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              Энэ үйлдлийг буцаах боломжгүй. Уг хоолны категорийг бүрмөсөн
+              устгах бөгөөд түүнд хамаарах бүх өгөгдөл серверээс устах болно.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

@@ -1,3 +1,4 @@
+import { AuthProvider } from "../context/AuthProvider";
 import { CartProvider } from "../context/Cart-Context";
 import { Footer } from "./_components/Footer";
 import { Navigation } from "./_components/navigation/Navigation";
@@ -9,8 +10,10 @@ export default function RootLayout({
 }) {
   return (
     <div>
-      <Navigation />
-      <CartProvider>{children}</CartProvider>
+      <AuthProvider>
+        <Navigation />
+        <CartProvider>{children}</CartProvider>
+      </AuthProvider>
       <Footer />
     </div>
   );

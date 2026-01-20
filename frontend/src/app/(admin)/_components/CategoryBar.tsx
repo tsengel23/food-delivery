@@ -109,7 +109,8 @@
 import { CategoryPill } from "./CategoryPill";
 import { AddNewCategoryButton } from "./AddNewCategoryButton";
 import { useEffect, useState } from "react";
-import { api } from "../../../lib/axios";
+// import { api } from "../../../lib/axios";
+import { api } from "@/lib/axios";
 import { CategoryPillAll } from "./CategoryPillAll";
 
 // const foods = [
@@ -195,11 +196,20 @@ import { CategoryPillAll } from "./CategoryPillAll";
 //   },
 // ];
 
+// type CategoryBarProps = {
+//   categoryId?: string;
+// };
+
 type CategoryBarProps = {
-  categoryId?: string;
+  selectedCategoryId: string;
+  onSelectCategory: (id: string, name: string) => void;
 };
 
-export const CategoryBar = ({ categoryId }: CategoryBarProps) => {
+// export const CategoryBar = ({ categoryId }: CategoryBarProps) => {
+export const CategoryBar = ({
+  selectedCategoryId,
+  onSelectCategory,
+}: CategoryBarProps) => {
   const [categories, setCategories] = useState<category[]>([]);
 
   useEffect(() => {
@@ -214,9 +224,20 @@ export const CategoryBar = ({ categoryId }: CategoryBarProps) => {
     <div className="w-full bg-white border rounded-xl p-6 flex flex-col gap-4  ">
       <h1 className="text-[#09090B] font-semibold text-xl">Dishes category</h1>
       <div className="flex flex-wrap gap-3 w-fit">
-        <CategoryPillAll name={"All dishes"} />
+        <CategoryPillAll
+          name={"All dishes"}
+          isActive={selectedCategoryId === ""}
+          onClick={() => onSelectCategory("", "All dishes")}
+        />
         {categories?.map((item) => {
-          return <CategoryPill key={item._id} category={item} />;
+          return (
+            <CategoryPill
+              key={item._id}
+              category={item}
+              isActive={selectedCategoryId === item._id}
+              onSelect={() => onSelectCategory(item._id, item.name)}
+            />
+          );
         })}
         <AddNewCategoryButton />
       </div>

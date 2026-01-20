@@ -8,9 +8,15 @@ import { useEffect, useState } from "react";
 
 type CategoryPillAllProps = {
   name: string;
+  isActive: boolean;
+  onClick: () => void;
 };
 
-export const CategoryPillAll = ({ name }: CategoryPillAllProps) => {
+export const CategoryPillAll = ({
+  name,
+  isActive,
+  onClick,
+}: CategoryPillAllProps) => {
   // const [selected, setSelected] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -24,9 +30,16 @@ export const CategoryPillAll = ({ name }: CategoryPillAllProps) => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center border rounded-full border-red-500 px-0.5 hover:bg-green-100 hover:border-green-400">
+    <div
+      className={[
+        "flex justify-center items-center border rounded-full  px-0.5 transition",
+        isActive
+          ? "bg-green-100 border-green-400"
+          : "border-red-500  hover:bg-green-100 hover:border-green-400",
+      ].join(" ")}
+    >
       <Button
-        // onClick={() => setSelected(true)}
+        onClick={onClick}
         variant={"ghost"}
         className={`border border-white rounded-full hover:bg-green-100 hover:border-green-100 group`}
       >

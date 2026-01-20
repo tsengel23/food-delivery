@@ -17,9 +17,9 @@ export default function HomeAdminMenu() {
       <AddNewDish title={"salads"} />
       <FoodMenuCard
         image={"/food2.png"}
-        title={"Brie Crostini Appetizer"}
+        name={"Brie Crostini Appetizer"}
         price={12}
-        overview={
+        ingredients={
           "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar."
         }
       />

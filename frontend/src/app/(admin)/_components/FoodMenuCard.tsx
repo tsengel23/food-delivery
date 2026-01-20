@@ -4,7 +4,7 @@ type FoodMenuCardProps = {
   name: string;
   price: number;
   ingredients: string;
-  image?: string;
+  image: string;
 };
 
 export const FoodMenuCard = ({

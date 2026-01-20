@@ -6,9 +6,11 @@ import { UserStatus } from "./UserStatus";
 import { AfterLogin } from "./AfterLogin";
 import { BeforeLogin } from "./BeforeLogin";
 import { useState } from "react";
+import { useAuth } from "@/app/context/AuthProvider";
 
 export const Navigation = () => {
-  const [enter, setEnter] = useState<boolean>(false);
+  const { user } = useAuth;
+  // const [enter, setEnter] = useState<boolean>(false);
   return (
     <div className="w-full bg-[#18181B] py-3 fixed z-10">
       <div className="flex justify-between mx-22">
@@ -18,7 +20,7 @@ export const Navigation = () => {
           </div>
         </Link>
 
-        {enter ? <BeforeLogin /> : <AfterLogin />}
+        {user ? <BeforeLogin /> : <AfterLogin />}
       </div>
     </div>
   );

@@ -20,11 +20,19 @@ import { FoodMenuSection } from "../_components/FoodMenuSection";
 
 export default function AdminPage() {
   const [categoryId, setCategoryId] = useState<string>("");
-  const [selected, setSelected] = useState(false);
+  const [categoryName, setCategoryName] = useState<string>("All dishes");
+
   return (
     <div className="w-full h-screen border border-blue-500 flex flex-col gap-6 mt-6">
-      <CategoryBar categoryId={categoryId} />
-      <FoodMenuSection />
+      {/* <CategoryBar categoryId={categoryId} /> */}
+      <CategoryBar
+        selectedCategoryId={categoryId}
+        onSelectCategory={(id, name) => {
+          setCategoryId(id);
+          setCategoryName(name);
+        }}
+      />
+      <FoodMenuSection categoryId={categoryId} title={categoryName} />
     </div>
   );
 }
