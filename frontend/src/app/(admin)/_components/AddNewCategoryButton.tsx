@@ -33,7 +33,7 @@ const formSchema = z.object({
   categoryName: z.string(),
 });
 
-export const AddNewCategoryButton = () => {
+export const AddNewCategoryButton = ({ setCategories }) => {
   // const [categoryList, setCategoryList] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -50,6 +50,7 @@ export const AddNewCategoryButton = () => {
     await api.post(`/categories/create`, { name: values.categoryName });
 
     form.reset();
+    setCategories((prev) => [...prev, { name: values.categoryName }]);
     setIsOpen(false);
   }
 

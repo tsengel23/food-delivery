@@ -9,7 +9,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (!filename)
       return NextResponse.json(
         { error: "Filename is required" },
-        { status: 400 }
+        { status: 400 },
       );
 
     if (!request.body)
@@ -29,7 +29,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         error: "Upload failed",
         details: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -215,6 +215,8 @@ export const CategoryBar = ({
   useEffect(() => {
     const fetchCategories = async () => {
       const { data } = await api.get<category[]>(`/categories`);
+      console.log(data);
+
       setCategories(data);
     };
     fetchCategories();
@@ -239,7 +241,7 @@ export const CategoryBar = ({
             />
           );
         })}
-        <AddNewCategoryButton />
+        <AddNewCategoryButton setCategories={setCategories} />
       </div>
     </div>
   );
