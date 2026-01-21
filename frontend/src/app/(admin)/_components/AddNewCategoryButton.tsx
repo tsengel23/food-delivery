@@ -5,8 +5,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -30,10 +28,16 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { api } from "@/lib/axios";
 const formSchema = z.object({
-  categoryName: z.string(),
+  categoryName: z.string().min(1, "Category name is required"),
 });
 
-export const AddNewCategoryButton = ({ setCategories }) => {
+type AddNewCategoryButtonProps = {
+  setCategories: React.Dispatch<React.SetStateAction<category[]>>;
+};
+
+export const AddNewCategoryButton = ({
+  setCategories,
+}: AddNewCategoryButtonProps) => {
   // const [categoryList, setCategoryList] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,10 +51,12 @@ export const AddNewCategoryButton = ({ setCategories }) => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
 
-    await api.post(`/categories/create`, { name: values.categoryName });
+    const { data: created } = await api.post(`/categories/create`, {
+      name: values.categoryName,
+    });
 
     form.reset();
-    setCategories((prev) => [...prev, { name: values.categoryName }]);
+    setCategories((prev: category[]) => [...prev, created]);
     setIsOpen(false);
   }
 

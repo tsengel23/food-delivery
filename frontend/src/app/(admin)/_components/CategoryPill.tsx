@@ -20,12 +20,14 @@ type CategoryPillProps = {
   category: category;
   isActive: boolean;
   onSelect: () => void;
+  onDelete: () => void;
 };
 
 export const CategoryPill = ({
   category,
   isActive,
   onSelect,
+  onDelete,
 }: CategoryPillProps) => {
   // const [selected, setSelected] = useState(false);
   const [count, setCount] = useState(0);
@@ -81,9 +83,10 @@ export const CategoryPill = ({
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={async () => {
-                await api.delete(`categories/${category._id}`);
-              }}
+              onClick={onDelete}
+              // onClick={async () => {
+              //   await api.delete(`categories/${category._id}`);
+              // }}
             >
               Delete
             </AlertDialogAction>
