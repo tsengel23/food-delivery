@@ -1,5 +1,7 @@
 import { timeStamp } from "node:console";
 import { Schema, model } from "mongoose";
+import { string } from "zod";
+import { required } from "zod/mini";
 
 const userSchema = new Schema(
   {
@@ -8,9 +10,10 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     profileImage: { type: String, required: false },
     address: { type: String, required: false },
+    role: { type: String, required: true, default: "customer" },
   },
   {
     timestamps: true,
-  }
+  },
 );
 export const UserModel = model("User", userSchema);
