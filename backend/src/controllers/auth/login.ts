@@ -2,12 +2,12 @@ import type { RequestHandler } from "express";
 import { UserModel } from "../../database/schema/user.schema.js";
 import jwt from "jsonwebtoken";
 
-// import { CategoryModel } from "../../database/schema/category.schema.js";
-
 export const login: RequestHandler = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
+  console.log(email);
 
-  const user = await UserModel.findOne({ username });
+  const user = await UserModel.findOne({ email });
+
   if (!user) return res.status(404).json({ message: "User not found" });
 
   const { password: userPassword, ...rest } = user.toObject();

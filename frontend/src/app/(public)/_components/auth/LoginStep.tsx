@@ -22,6 +22,7 @@ import { ChevronLeftIcon } from "lucide-react";
 import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthProvider";
 
 const formSchema = z.object({
   email: z
@@ -50,6 +51,8 @@ const formSchema = z.object({
 });
 
 export const LoginStep = () => {
+  const { login } = useAuth();
+
   const router = useRouter();
   const { setStep } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,8 +63,10 @@ export const LoginStep = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("ji");
+
+    await login(values.email, values.password);
     router.replace("/");
   }
   return (
