@@ -3,18 +3,19 @@ import { UserModel } from "../../database/schema/user.schema.js";
 import jwt from "jsonwebtoken";
 
 export const register: RequestHandler = async (req, res) => {
-  const { username, password, email } = req.body;
+  const { password, email } = req.body;
+  // const { username, password, email } = req.body;
 
-  const isUsernameExist = await UserModel.findOne({ username });
-  if (isUsernameExist)
-    return res.status(400).json({ message: "Username already exist" });
+  // const isUsernameExist = await UserModel.findOne({ username });
+  // if (isUsernameExist)
+  //   return res.status(400).json({ message: "Username already exist" });
 
   const isEmailExist = await UserModel.findOne({ email });
   if (isEmailExist)
     return res.status(400).json({ message: "Email already exist" });
 
   const user = await UserModel.create({
-    username,
+    // username,
     password,
     email,
   });

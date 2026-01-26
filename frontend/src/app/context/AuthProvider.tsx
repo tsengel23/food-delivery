@@ -3,6 +3,7 @@
 import { api } from "@/lib/axios";
 import { useRouter } from "next/navigation";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
+import { toast } from "sonner";
 
 type AuthContextType = {
   user: User | null;
@@ -28,29 +29,36 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = async (email: string, password: string) => {
-    const { data } = await api.post("/auth/login", {
-      email,
-      password,
-    });
+    try {
+      const { data } = await api.post("/auth/login", {
+        email,
+        password,
+      });
 
-    const { user } = data;
+      const { user } = data;
 
-    setUser(user);
-
-    router.push("/");
+      setUser(user);
+      router.push("/");
+    } catch (error) {
+      toast.error("Invalid username or password");
+    }
   };
 
   const register = async (
-    username: string,
+    // username: string,
     email: string,
     password: string,
   ) => {
-    await api.post("/auth/register", {
-      username,
-      email,
-      password,
-    });
-    router.push("auth/login");
+    try {
+      await api.post("/auth/register", {
+        // username,
+        email,
+        password,
+      });
+      router.push("auth/login");
+    } catch (error) {
+      toast.error("Email already exists");
+    }
   };
 
   return (

@@ -64,10 +64,10 @@ export const LoginStep = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("ji");
+    // console.log("ji");
 
     await login(values.email, values.password);
-    router.replace("/");
+    // router.replace("/");  <-----ene hereggui uchir ni login gedeg function authProvider deer bgaa bolhoor!!!
   }
   return (
     <motion.div

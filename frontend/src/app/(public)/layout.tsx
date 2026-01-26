@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import { AuthProvider } from "../context/AuthProvider";
 import { CartProvider } from "../context/Cart-Context";
 import { Footer } from "./_components/Footer";

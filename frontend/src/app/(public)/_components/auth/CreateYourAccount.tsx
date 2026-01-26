@@ -22,6 +22,7 @@ import { ChevronLeftIcon } from "lucide-react";
 import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthProvider";
 
 const formSchema = z.object({
   email: z
@@ -37,6 +38,10 @@ const formSchema = z.object({
 });
 
 export const CreateYourAccount = () => {
+  //
+  // const { register } = useAuth();<----hamgiin suuliin negtgej bazaj bgaa step2 deer heregtei
+  //
+
   const router = useRouter();
   const { setStep } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
