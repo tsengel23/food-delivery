@@ -27,43 +27,47 @@ import { CartAndOrder } from "./CartAndOrder";
 import { Badge } from "@/components/ui/badge";
 import { PaymentInfo } from "./PaymentInfo";
 import { CartContentDeliveryLocation } from "./CartContentDeliveryLocation";
+import { Description } from "@radix-ui/react-dialog";
+import { useCart } from "@/app/context/Cart-Context";
 
-const foods = [
-  {
-    image: "food2.png",
-    title: "Mongol food",
-    overview:
-      "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    price: 12.99,
-  },
-  {
-    image: "food2.png",
-    title: "Mongol food",
-    overview:
-      "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    price: 12.99,
-  },
-  {
-    image: "food2.png",
-    title: "Mongol food",
-    overview:
-      "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    price: 12.99,
-  },
-  {
-    image: "food2.png",
-    title: "Mongol food",
-    overview:
-      "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    price: 12.99,
-  },
-];
+// const foods = [
+//   {
+//     image: "food2.png",
+//     name: "Mongol food",
+//     ingredients:
+//       "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+//     price: 12.99,
+//   },
+//   {
+//     image: "food2.png",
+//     name: "Mongol food",
+//     ingredients:
+//       "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+//     price: 12.99,
+//   },
+//   {
+//     image: "food2.png",
+//     name: "Mongol food",
+//     ingredients:
+//       "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+//     price: 12.99,
+//   },
+//   {
+//     image: "food2.png",
+//     name: "Mongol food",
+//     ingredients:
+//       "  Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+//     price: 12.99,
+//   },
+// ];
 
 // type OrderProps = {
 //   totalItems: number;
 // };
 
 export const Order = () => {
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
+
   // const totalItems = useState(0);
   return (
     <Sheet>
@@ -116,15 +120,14 @@ export const Order = () => {
           >
             <div className="flex flex-col bg-white rounded-xl p-4 mb-6">
               <h1 className="text-[#71717A] text-xl font-semibold">My cart</h1>
-              <div className="w-fit h-[289px] grid grid-cols-1 border border-green-600 overflow-y-auto">
-                {foods.map((item, index) => {
+              <div className="w-full h-[289px] grid grid-cols-1 border border-green-600 overflow-y-auto">
+                {cartItems.map((item) => {
                   return (
                     <MyCartFood
-                      key={index}
-                      image={item.image}
-                      title={item.title}
-                      overview={item.overview}
-                      price={item.price}
+                      key={item._id}
+                      item={item}
+                      onUpdateQuantity={updateQuantity}
+                      onRemove={removeFromCart}
                     />
                   );
                 })}

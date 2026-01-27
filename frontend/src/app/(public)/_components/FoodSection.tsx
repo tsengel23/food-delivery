@@ -78,7 +78,7 @@ export const FoodSection = ({ categoryName, categoryId }: FoodSectionProps) => {
       setFoods(data);
     };
     fetchfoods();
-  }, []);
+  }, [categoryId]);
 
   return (
     <div className="w-full h-fit grid grid-cols-3 gap-9 border border-red-600 mb-13.5">

@@ -151,9 +151,9 @@ export const LoginStep = () => {
               type="submit"
               className="w-full font-medium text-sm"
             >
-              Let's Go
+              {" Let's Go"}
             </Button>
-            <Link href="/">adgadg</Link>
+            {/* <Link href="/">adgadg</Link> */}
             <FormFooter
               text={"Don’t have an account?"}
               step={"Sign up"}
