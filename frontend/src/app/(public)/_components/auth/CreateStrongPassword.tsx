@@ -23,6 +23,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { register } from "module";
+import { useAuth } from "@/app/context/AuthProvider";
 
 const formSchema = z
   .object({
@@ -48,6 +50,7 @@ const formSchema = z
 
 export const CreateStrongPassword = () => {
   const [showPass, setShowPass] = useState<boolean>(false);
+  const { newUser, register } = useAuth();
   const router = useRouter();
   const { setStep } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +63,8 @@ export const CreateStrongPassword = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    router.replace("/login");
+    register(newUser.email, values.password);
+    // router.replace("/login");
   }
   return (
     <motion.div

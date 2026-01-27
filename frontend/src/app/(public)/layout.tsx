@@ -11,10 +11,8 @@ export default function RootLayout({
 }) {
   return (
     <div>
-      <AuthProvider>
-        <Navigation />
-        <CartProvider>{children}</CartProvider>
-      </AuthProvider>
+      <Navigation />
+      <CartProvider>{children}</CartProvider>
       <Footer />
     </div>
   );

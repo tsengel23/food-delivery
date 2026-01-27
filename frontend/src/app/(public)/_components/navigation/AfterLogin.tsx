@@ -1,3 +1,4 @@
+"use client";
 import { DeliveryAddress } from "./DeliveryAddress";
 import { DeliveryAddressLocation } from "./DeliveryAddressLocation";
 import { Order } from "./Order";

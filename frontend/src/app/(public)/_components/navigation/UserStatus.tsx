@@ -36,7 +36,7 @@ export const UserStatus = () => {
         <DropdownMenuItem className="border w-fit h-hit p-0 rounded-full my-3">
           <Button
             onClick={() => {
-              router.replace("/login");
+              router.replace("/");
             }}
             variant={"outline"}
             className=" rounded-full overflow-hidden border border-red-200"

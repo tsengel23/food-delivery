@@ -43,6 +43,7 @@ export const CreateYourAccount = () => {
   //
 
   const router = useRouter();
+  const { setNewUser } = useAuth();
   const { setStep } = useContext(StepContext);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,6 +54,7 @@ export const CreateYourAccount = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    setNewUser({ email: values.email, password: "" });
     setStep(2);
   }
   return (

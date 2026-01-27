@@ -11,6 +11,9 @@ export const register: RequestHandler = async (req, res) => {
   //   return res.status(400).json({ message: "Username already exist" });
 
   const isEmailExist = await UserModel.findOne({ email });
+
+  console.log(isEmailExist);
+
   if (isEmailExist)
     return res.status(400).json({ message: "Email already exist" });
 

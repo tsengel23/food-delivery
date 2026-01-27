@@ -9,7 +9,8 @@ import { useState } from "react";
 import { useAuth } from "@/app/context/AuthProvider";
 
 export const Navigation = () => {
-  const { user } = useAuth;
+  const { user } = useAuth();
+  console.log("adgadg", user);
   // const [enter, setEnter] = useState<boolean>(false);
   return (
     <div className="w-full bg-[#18181B] py-3 fixed z-10">
@@ -19,8 +20,8 @@ export const Navigation = () => {
             <img src="/logo1.png" />
           </div>
         </Link>
-
-        {user ? <BeforeLogin /> : <AfterLogin />}
+        {/* <BeforeLogin /> <AfterLogin /> */}
+        {!user ? <BeforeLogin /> : <AfterLogin />}
       </div>
     </div>
   );

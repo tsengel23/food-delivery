@@ -23,6 +23,7 @@ import { FormFooter } from "./FormFooter";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthProvider";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z
@@ -53,8 +54,8 @@ const formSchema = z.object({
 export const LoginStep = () => {
   const { login } = useAuth();
 
-  const router = useRouter();
   const { setStep } = useContext(StepContext);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -152,6 +153,7 @@ export const LoginStep = () => {
             >
               Let's Go
             </Button>
+            <Link href="/">adgadg</Link>
             <FormFooter
               text={"Don’t have an account?"}
               step={"Sign up"}
