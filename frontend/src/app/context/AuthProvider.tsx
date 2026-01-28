@@ -8,6 +8,7 @@ import {
   PropsWithChildren,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { toast } from "sonner";
@@ -39,6 +40,11 @@ type User = {
   role: string;
 };
 
+type LoginResponse = {
+  user: User;
+  accessToken: string;
+};
+
 export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
@@ -50,12 +56,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { data } = await api.post("/auth/login", {
+      const { data } = await api.post<LoginResponse>("/auth/login", {
         email,
         password,
       });
 
-      const { user } = data;
+      const { user, accessToken } = data;
+
+      localStorage.setItem("accessToken", accessToken);
 
       setUser(user);
       router.push("/");
@@ -80,6 +88,26 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       toast.error("Email already exists");
     }
   };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    const fetchMe = async () => {
+      try {
+        const { data } = await api.get<{ user: User }>("/auth/me", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        setUser(data.user);
+      } catch {
+        localStorage.removeItem("accessToken");
+      }
+    };
+
+    fetchMe();
+  }, []);
 
   return (
     <AuthContext.Provider
