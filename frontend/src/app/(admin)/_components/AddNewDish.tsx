@@ -359,6 +359,13 @@ export const AddNewDish = ({ title }: AddNewDish) => {
                     <FormControl>
                       <div className="relative">
                         <Input
+                          // ref={fileInputRef}
+                          // type="file"
+                          // accept="image/*"
+                          // className="hidden"
+                          // placeholder="Upload image ..."
+                          // onChange={handleFileUpload}
+                          // id="file-upload"
                           type="file"
                           placeholder="image file"
                           className="absolute w-full h-full top-0 left-0 opacity-0 z-10 cursor-pointer"
@@ -395,7 +402,7 @@ export const AddNewDish = ({ title }: AddNewDish) => {
                 )}
               />
             </div>
-            <Button type="submit" className="w-20">
+            <Button variant={"destructive"} type="submit" className="w-20">
               Submit
             </Button>
           </form>
