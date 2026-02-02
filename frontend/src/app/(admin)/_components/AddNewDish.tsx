@@ -220,6 +220,14 @@
 
 "use client";
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Dialog,
   DialogClose,
   DialogContent,
@@ -444,6 +452,33 @@ export const AddNewDish = ({ title }: AddNewDish) => {
                 )}
               />
             </div>
+            <FormField
+              control={form.control}
+              name="categoryId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {categories.map((category) => (
+                        <SelectItem key={category._id} value={category._id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <div className="w-full">
               <FormField
                 control={form.control}
