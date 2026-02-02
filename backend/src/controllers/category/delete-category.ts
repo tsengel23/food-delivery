@@ -1,33 +1,78 @@
 //  delete ni data butsaah albagui
 // confirmation message baihad l hangalttai
 
-import type { RequestHandler } from "express";
+// import type { RequestHandler } from "express";
 
-import { CategoryModel } from "../../database/schema/category.schema.js";
+// import { CategoryModel } from "../../database/schema/category.schema.js";
 
-export const deleteCategory: RequestHandler = async (req, res) => {
-  const { id } = req.params;
+// export const deleteCategory: RequestHandler = async (req, res) => {
+//   const { id } = req.params;
 
-  const deleteCategory = await CategoryModel.findByIdAndDelete(id);
+//   const deleteCategory = await CategoryModel.findByIdAndDelete(id);
 
-  if (!deleteCategory) {
-    return res.status(404).json({ message: "Category not found" });
-  }
+//   if (!deleteCategory) {
+//     return res.status(404).json({ message: "Category not found" });
+//   }
 
-  res.status(200).json({ message: "Category deleted successfully" });
-};
+//   res.status(200).json({ message: "Category deleted successfully" });
+// };
 
-// try catch error handler-tai shinechilsen huvilbar!!!!!!
+//
+//
 
-// export const deleteCategory: RequestHandler = async (req, res, next) => {
+// import type { RequestHandler } from "express";
+// import { CategoryModel } from "../../database/schema/category.schema.js";
+// import { FoodModel } from "../../database/schema/food.schema.js";
+
+// export const deleteCategory: RequestHandler = async (req, res) => {
 //   try {
-//     const { id } = req.params;
-//     const category = await deleteCategoryService(id);
+//     const { categoryId } = req.params; // эсвэл id гэж байж магадгүй
 
-//     if (!category) return res.status(404).json({ message: "Not found" });
+//     // ✅ 1) Энэ category дотор хоол байна уу?
+//     const count = await FoodModel.countDocuments({ categoryIds: categoryId });
 
-//     res.json({ message: "Deleted" });
-//   } catch (e) {
-//     next(e);
+//     if (count > 0) {
+//       return res.status(409).json({
+//         message: "Category has foods. Move or delete foods first.",
+//         count,
+//       });
+//     }
+
+//     // ✅ 2) Хоол байхгүй бол устгана
+//     await CategoryModel.findByIdAndDelete(categoryId);
+
+//     return res.json({ ok: true });
+//   } catch (err) {
+//     console.error("Delete category error:", err);
+//     return res.status(500).json({ message: "Delete category failed" });
 //   }
 // };
+//
+//
+import type { RequestHandler } from "express";
+import { CategoryModel } from "../../database/schema/category.schema.js";
+import { FoodModel } from "../../database/schema/food.schema.js";
+
+export const deleteCategory: RequestHandler = async (req, res) => {
+  try {
+    const { id } = req.params; // ⭐ router дээр :id гэж байгаа
+
+    // 1) Энэ category дотор хоол байна уу?
+    const count = await FoodModel.countDocuments({ categoryIds: id });
+
+    if (count > 0) {
+      return res.status(409).json({
+        message: "Category has foods. Move or delete foods first.",
+        count,
+      });
+    }
+
+    // 2) Хоол байхгүй бол устгана
+    await CategoryModel.findByIdAndDelete(id);
+
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("Delete category error:", err);
+    return res.status(500).json({ message: "Delete category failed" });
+  }
+};
