@@ -21,6 +21,7 @@ type CategoryPillProps = {
   isActive: boolean;
   onSelect: () => void;
   onDelete: () => void;
+  refreshKey: number;
 };
 
 export const CategoryPill = ({
@@ -28,6 +29,7 @@ export const CategoryPill = ({
   isActive,
   onSelect,
   onDelete,
+  refreshKey,
 }: CategoryPillProps) => {
   // const [selected, setSelected] = useState(false);
   const [count, setCount] = useState(0);
@@ -39,7 +41,7 @@ export const CategoryPill = ({
     };
 
     getFoodCount();
-  }, [category._id]);
+  }, [category._id, refreshKey]);
 
   return (
     // <div className={["flex justify-center items-center border rounded-full border-red-500 px-0.5 transition hover:bg-green-100 hover:border-green-400",

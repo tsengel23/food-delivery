@@ -19,6 +19,8 @@ import { CategoryBar } from "../_components/CategoryBar";
 import { FoodMenuSection } from "../_components/FoodMenuSection";
 
 export default function AdminPage() {
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const [categoryId, setCategoryId] = useState<string>("");
   const [categoryName, setCategoryName] = useState<string>("All dishes");
 
@@ -27,12 +29,18 @@ export default function AdminPage() {
       {/* <CategoryBar categoryId={categoryId} /> */}
       <CategoryBar
         selectedCategoryId={categoryId}
+        refreshKey={refreshKey}
+        onCategoryChanged={() => setRefreshKey((k) => k + 1)}
         onSelectCategory={(id, name) => {
           setCategoryId(id);
           setCategoryName(name);
         }}
       />
-      <FoodMenuSection categoryId={categoryId} title={categoryName} />
+      <FoodMenuSection
+        categoryId={categoryId}
+        title={categoryName}
+        onFoodCreated={() => setRefreshKey((k) => k + 1)}
+      />
     </div>
   );
 }

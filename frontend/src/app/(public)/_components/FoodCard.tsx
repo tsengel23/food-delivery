@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Minus, Plus, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useCart } from "@/app/context/Cart-Context";
+import { toast } from "sonner";
 
 export interface FoodItem {
   _id: string;
@@ -43,7 +44,7 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
   // );
 
   const handleAddToCart = () => {
-    // 1) нэг ширхэг нэмнэ
+    // 1) cart-д нэмнэ
     addToCart(
       {
         _id: item._id,
@@ -54,12 +55,11 @@ export const FoodCard = ({ item, onClose, onAddToCart }: FoodCardProps) => {
       },
       quantity,
     );
-    // 2) quantity-г тааруулах (хэрвээ 3 гэж сонгосон бол нэмж өсгөнө)
-    // addToCart чинь 1-ээр нэмдэг тул үлдсэн (quantity-1)-ийг update хийж өгнө
 
-    // const exixting = cartItems.find((c) => c._id === item._id);
-    // const currentQnty = exixting?.quantity ?? 0;
-    // updateQuantity(item._id, currentQnty + quantity);
+    // 2) toast
+    toast.success("Food is being added to the cart!");
+
+    // 3) dialog/state reset
     setQuantity(1);
     setOpen(false);
     onClose();

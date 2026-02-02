@@ -258,6 +258,7 @@ import { api } from "@/lib/axios";
 import Image from "next/image";
 import { ImageIcon, Plus, Upload, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 const foodFormSchema = z.object({
   name: z.string().min(2, {
@@ -293,9 +294,15 @@ type Category = {
 
 type AddNewDish = {
   title: string;
+  defaultCategoryId: string;
+  onCreated: (food: food) => void; // дараа type хийж болно
 };
 
-export const AddNewDish = ({ title }: AddNewDish) => {
+export const AddNewDish = ({
+  title,
+  defaultCategoryId,
+  onCreated,
+}: AddNewDish) => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isUploading, setIsUploading] = useState(false);
@@ -309,7 +316,7 @@ export const AddNewDish = ({ title }: AddNewDish) => {
       price: "",
       ingredients: "",
       image: "",
-      categoryId: "",
+      categoryId: defaultCategoryId || "",
     },
   });
 
@@ -357,30 +364,58 @@ export const AddNewDish = ({ title }: AddNewDish) => {
   };
 
   const onSubmit = async (values: FoodFormValues) => {
-    await api.post("/foods/create", {
+    toast.success("New dish is being added to the menu");
+    const { data: createdFood } = await api.post<food>("/foods/create", {
       name: values.name,
       price: parseFloat(values.price),
       ingredients: values.ingredients,
       image: values.image,
       categoryIds: [values.categoryId],
     });
+    console.log("createdFood:", createdFood);
 
+    onCreated(createdFood); // ⭐ parent-д мэдэгдэнэ
     form.reset();
     setUploadedImageUrl("");
+    setOpen(false);
   };
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const { data } = await api.get<Category[]>("/categories");
-      setCategories(data);
-    };
+  const fetchCategories = async () => {
+    const { data } = await api.get<Category[]>("/categories");
+    setCategories(data);
+  };
 
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     const { data } = await api.get<Category[]>("/categories");
+  //     setCategories(data);
+  //   };
+
+  //   fetchCategories();
+  // }, []);
+  useEffect(() => {
+    if (!open) return; // dialog хаалттай үед битгий тат
     fetchCategories();
-  }, []);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    if (!defaultCategoryId) return;
+
+    form.setValue("categoryId", defaultCategoryId, { shouldValidate: true });
+  }, [open, defaultCategoryId, categories.length]);
+
+  // useEffect(() => {
+  //   // All dishes үед "" байвал preset хийхгүй
+  //   if (!defaultCategoryId) return;
+
+  //   // Dialog нээхэд category автоматаар сонгогдоно
+  //   form.setValue("categoryId", defaultCategoryId, { shouldValidate: true });
+  // }, [defaultCategoryId, form]);
 
   console.log(form.formState.errors);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <div className="border border-dashed  border-[#EF4444] rounded-xl flex justify-center items-center aspect-[370/241] h-[241px] ">
         <div className="flex flex-col gap-6 items-center">
           <DialogTrigger asChild>
@@ -458,10 +493,7 @@ export const AddNewDish = ({ title }: AddNewDish) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a category" />
@@ -560,7 +592,7 @@ export const AddNewDish = ({ title }: AddNewDish) => {
               type="submit"
               className="w-20"
             >
-              NikoN
+              Submit
             </Button>
           </form>
         </Form>

@@ -67,23 +67,22 @@ import { useCart } from "@/app/context/Cart-Context";
 
 export const Order = () => {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  // const totalItems = useState(0);
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
           variant={"outline"}
-          className="w-9 h-9 flex justify-center items-center bg-white rounded-full hover:bg-[#FF692A] hover:text-black transition ease-in"
+          className="w-9 h-9 flex justify-center items-center bg-white rounded-full hover:bg-[#FF692A] hover:text-black transition ease-in relative"
         >
           <ShoppingCart className="w-4 h-4" />
-          {/*  */}
-          {/* {totalItems > 0 && (
+
+          {count > 0 && (
             <span className="absolute -top-1 -right-1 bg-white text-red-500 text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-sm">
-              {totalItems}
+              {count}
             </span>
-          )} */}
-          {/*  */}
+          )}
         </Button>
       </SheetTrigger>
       <SheetContent className="border-3 border-red-600 min-w-130 h-[100dvh] flex flex-col rounded-tl-3xl rounded-bl-3xl bg-[#404040] [&>button]:hidden">

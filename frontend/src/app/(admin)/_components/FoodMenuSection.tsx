@@ -52,11 +52,13 @@ import { api } from "@/lib/axios";
 type FoodMenuSectionProps = {
   categoryId: string;
   title: string;
+  onFoodCreated: () => void;
 };
 
 export const FoodMenuSection = ({
   categoryId,
   title,
+  onFoodCreated,
 }: FoodMenuSectionProps) => {
   const [foods, setFoods] = useState<food[]>([]);
   const [loading, setLoading] = useState(false);
@@ -82,7 +84,14 @@ export const FoodMenuSection = ({
         {title}(<span>{foods.length}</span>)
       </h1>
       <div className="flex flex-wrap gap-3 w-fit">
-        <AddNewDish title={title} />
+        <AddNewDish
+          title={title}
+          defaultCategoryId={categoryId}
+          onCreated={(createdFood) => {
+            setFoods((prev) => [createdFood, ...prev]);
+            onFoodCreated(); //badge count refresh trigger
+          }}
+        />
 
         {loading && <p>Loading ...</p>}
 

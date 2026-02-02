@@ -27,6 +27,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { api } from "@/lib/axios";
+import { toast } from "sonner";
+
 const formSchema = z.object({
   categoryName: z.string().min(1, "Category name is required"),
 });
@@ -49,6 +51,7 @@ export const AddNewCategoryButton = ({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    toast.success("New Category is being added to the menu");
     console.log(values);
 
     const { data: created } = await api.post(`/categories/create`, {
