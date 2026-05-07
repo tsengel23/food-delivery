@@ -60,7 +60,7 @@ export const PaymentInfo = ({ address, onOrderPlaced }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col rounded-xl p-4 bg-white gap-2">
+      <div className="flex flex-col rounded-xl p-4 bg-white gap-2 mb-6">
         <h1 className="text-[#71717A] text-xl font-semibold">Payment info</h1>
         <div className="flex flex-col">
           <div className="flex justify-between text-sm">

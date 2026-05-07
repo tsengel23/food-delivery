@@ -57,7 +57,7 @@ export const DishesInfo = ({ food, onUpdated, onDeleted }: DishesInfoProps) => {
   const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState<category[]>([]);
   const [isUploading, setIsUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState(food.image);
+  const [previewUrl, setPreviewUrl] = useState(food.image?.trim() ?? "");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // categoryIds нь populate хийгдсэн объект массив байдаг
