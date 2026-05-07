@@ -45,7 +45,7 @@ app.use(express.json());
 if (config.isProduction) {
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    limit: 100,
+    limit: 500,
     message: { success: false, message: "Too many requests, try again later." },
   });
   app.use(limiter);
