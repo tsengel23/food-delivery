@@ -102,7 +102,7 @@ export const CategoryBar = ({
           />
         ))}
 
-        <AddNewCategoryButton setCategories={setCategories} />
+        <AddNewCategoryButton setCategories={setCategories} onCreated={onCategoryChanged} />
       </div>
     </div>
   );

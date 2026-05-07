@@ -35,10 +35,12 @@ const formSchema = z.object({
 
 type AddNewCategoryButtonProps = {
   setCategories: React.Dispatch<React.SetStateAction<category[]>>;
+  onCreated?: () => void;
 };
 
 export const AddNewCategoryButton = ({
   setCategories,
+  onCreated,
 }: AddNewCategoryButtonProps) => {
   // const [categoryList, setCategoryList] = useState();
   const [isOpen, setIsOpen] = useState(false);
@@ -60,6 +62,7 @@ export const AddNewCategoryButton = ({
 
     form.reset();
     setCategories((prev: category[]) => [...prev, created]);
+    onCreated?.();
     setIsOpen(false);
   }
 
