@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts",
+    "start": "npx tsx src/index.ts",
     "dev": "nodemon src/index.ts",
     "migrate": "node --loader ts-node/esm src/scripts/migrate.ts"
   },
