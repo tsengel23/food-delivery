@@ -52,6 +52,7 @@ import { api } from "@/lib/axios";
 type FoodMenuSectionProps = {
   categoryId: string;
   title: string;
+  refreshKey?: number;
   onFoodCreated: () => void;
   onFoodDeleted?: () => void;
 };
@@ -59,6 +60,7 @@ type FoodMenuSectionProps = {
 export const FoodMenuSection = ({
   categoryId,
   title,
+  refreshKey,
   onFoodCreated,
   onFoodDeleted,
 }: FoodMenuSectionProps) => {
@@ -79,7 +81,7 @@ export const FoodMenuSection = ({
       }
     };
     fetchFoods();
-  }, [categoryId]); //hamgiin chuhal mor
+  }, [categoryId, refreshKey]);
   return (
     <div className="w-full bg-white border rounded-xl p-5 flex flex-col gap-4  ">
       <h1 className="text-[#09090B] font-semibold text-xl">
@@ -102,11 +104,17 @@ export const FoodMenuSection = ({
             <FoodMenuCard
               key={item._id}
               food={item}
-              onUpdated={(updated) =>
-                setFoods((prev) =>
-                  prev.map((f) => (f._id === updated._id ? updated : f)),
-                )
-              }
+              onUpdated={(updated) => {
+                const newCatId = (updated.categoryIds as category[])?.[0]?._id;
+                if (categoryId && newCatId !== categoryId) {
+                  setFoods((prev) => prev.filter((f) => f._id !== updated._id));
+                  onFoodDeleted?.();
+                } else {
+                  setFoods((prev) =>
+                    prev.map((f) => (f._id === updated._id ? updated : f)),
+                  );
+                }
+              }}
               onDeleted={(id) => {
                 setFoods((prev) => prev.filter((f) => f._id !== id));
                 onFoodDeleted?.();

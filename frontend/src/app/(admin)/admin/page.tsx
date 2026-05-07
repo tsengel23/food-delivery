@@ -38,6 +38,7 @@ export default function AdminPage() {
               key={cat._id}
               categoryId={cat._id}
               title={cat.name}
+              refreshKey={refreshKey}
               onFoodCreated={handleRefresh}
               onFoodDeleted={handleRefresh}
             />
