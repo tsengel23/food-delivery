@@ -36,7 +36,7 @@ export const Order = () => {
 
   const fetchOrders = async () => {
     try {
-      const { data } = await api.get<Order[]>("/orders");
+      const { data } = await api.get<Order[]>("/orders/my");
       setOrders(data);
     } catch {
       // token байхгүй үед (нэвтрээгүй) алдаа гарч болно — дуугүй өнгөрнө

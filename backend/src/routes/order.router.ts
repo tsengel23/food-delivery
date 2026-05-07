@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { createOrder } from "../controllers/order/create-order.js";
 import { getOrders } from "../controllers/order/get-orders.js";
+import { getMyOrders } from "../controllers/order/get-my-orders.js";
 import { getOrder } from "../controllers/order/get-order.js";
 import { updateOrder } from "../controllers/order/update-order.js";
 import { deleteOrder } from "../controllers/order/delete-order.js";
@@ -14,6 +15,7 @@ const OrderRouter = Router();
 // Бүх order route нэвтрэлт шаардана
 OrderRouter.use(authenticate);
 
+OrderRouter.get("/my", getMyOrders);
 OrderRouter.get("/", getOrders); // admin: бүгдийг, customer: өөрийнхийг
 OrderRouter.get("/:id", getOrder);
 OrderRouter.post("/", validate(createOrderSchema), createOrder);
