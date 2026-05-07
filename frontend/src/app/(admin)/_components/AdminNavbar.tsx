@@ -14,7 +14,7 @@ const AdminNavbar = () => {
     <div className="h-full w-fit border-green-500">
       <Link href="/">
         <div className="mt-9 mx-5">
-          <img src="/logo2.png" />
+          <img src="/Logo2.png" />
         </div>
       </Link>
       <div className="flex flex-col gap-6 mt-10 mx-5 justify-between">

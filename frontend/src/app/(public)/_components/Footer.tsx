@@ -105,7 +105,7 @@ export const Footer = () => {
               <img className="w-7 h-7" src="./facebook.png" />
             </Link>
             <Link href="#" target="_blank">
-              <img className="w-7 h-7" src="./instagram.png" />
+              <img className="w-7 h-7" src="/Instagram.png" />
             </Link>
           </div>
         </div>
