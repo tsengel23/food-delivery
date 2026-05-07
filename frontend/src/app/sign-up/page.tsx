@@ -18,7 +18,7 @@ export default function SignUp() {
   return (
     <StepContext.Provider value={{ setStep }}>
       <AnimatePresence>
-        <div className="w-screen h-screen pl-25 p-5 border-2 border-red-500 flex gap-12 ">
+        <div className="w-screen h-screen pl-25 p-5  flex gap-12 ">
           <div className="flex items-center">
             {step == 1 && <CreateYourAccount />}
             {step == 2 && <CreateStrongPassword />}

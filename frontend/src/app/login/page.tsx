@@ -22,7 +22,7 @@ export default function Login() {
   return (
     <StepContext.Provider value={{ step, setStep }}>
       <AnimatePresence>
-        <div className="w-screen h-screen pl-25 p-5 border-2 border-red-500 flex gap-12 ">
+        <div className="w-screen h-screen pl-25 p-5  flex gap-12 ">
           <div className="flex items-center">
             {/* {step == 1 ? <LoginStep /> : <div> heeloo</div>} */}
             {step == 1 && <LoginStep />}

@@ -156,7 +156,7 @@ export const AddNewDish = ({
     });
     console.log("createdFood:", createdFood);
 
-    onCreated(createdFood); // ⭐ parent-д мэдэгдэнэ
+    onCreated(createdFood);
     form.reset();
     setUploadedImageUrl("");
     setOpen(false);
@@ -181,7 +181,6 @@ export const AddNewDish = ({
   }, [open, defaultCategoryId, categories.length]);
 
  
-  console.log(form.formState.errors);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <div className="border border-dashed  border-[#EF4444] rounded-xl flex justify-center items-center aspect-[271/241] h-[241px] ">

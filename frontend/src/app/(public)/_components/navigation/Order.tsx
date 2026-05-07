@@ -133,7 +133,7 @@ export const Order = () => {
               <div className="flex-1 min-h-0 overflow-y-auto flex flex-col bg-white rounded-xl p-4">
                 <h1 className="text-[#09090B] text-xl font-semibold">Order history</h1>
 
-                {orders.length === 0 && (
+                {orders.filter((o) => o.status !== "cancelled").length === 0 && (
                   <div className="flex flex-col gap-1 items-center justify-center p-8 rounded-xl bg-[#FAFAFA] mt-3">
                     <img src="/logo empthy.png" className="w-[61px] h-[50px]" />
                     <p className="font-bold text-[#09090B] text-base">No Orders Yet?</p>
@@ -143,7 +143,7 @@ export const Order = () => {
                   </div>
                 )}
 
-                {orders.map((order, idx) => (
+                {orders.filter((o) => o.status !== "cancelled").map((order, idx) => (
                   <div key={order._id}>
                     {idx > 0 && (
                       <div className="border-t border-dashed border-gray-300 my-3" />

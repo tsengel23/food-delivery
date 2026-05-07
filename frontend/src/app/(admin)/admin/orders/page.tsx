@@ -2,7 +2,7 @@ import { AdminOrders } from "../../_components/AdminOrders";
 
 export default function HomeAdminOrder() {
   return (
-    <div className="w-full h-fit  mt-6 bg-gray-50">
+    <div className="w-full mt-6">
       <AdminOrders />
     </div>
   );

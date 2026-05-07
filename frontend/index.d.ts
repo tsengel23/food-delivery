@@ -1,3 +1,5 @@
+declare module "*.css";
+
 type food = {
   _id: string;
   name: string;
