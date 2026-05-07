@@ -20,7 +20,12 @@ import { OrderRouter } from "./routes/order.router.js";
 const require = createRequire(import.meta.url);
 const helmet = require("helmet") as () => express.RequestHandler;
 
-await connectToDatabase();
+try {
+  await connectToDatabase();
+} catch (err) {
+  console.log("❌ Database connection failed:", err);
+  process.exit(1);
+}
 
 const app = express();
 
