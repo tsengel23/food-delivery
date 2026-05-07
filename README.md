@@ -1,4 +1,4 @@
-# Hoho Food Delivery
+# Food Delivery
 
 A full-stack food delivery web application with a customer-facing storefront and an admin dashboard.
 
