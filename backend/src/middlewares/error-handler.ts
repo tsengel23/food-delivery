@@ -1,28 +1,20 @@
 import type { ErrorRequestHandler } from "express";
 import { ZodError } from "zod";
 
+// Бүх алдааг нэг газраас барьж, нэг хэлбэртэй response буцаана
 export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  console.error("🔥 RAW ERROR:", err);
-
-  // 🟡 Zod validation error
+  // Zod validation алдаа — 400 Bad Request
   if (err instanceof ZodError) {
-    return res.status(400).json({
+    res.status(400).json({
       success: false,
-      errors: err.issues,
+      message: "Validation failed",
+      errors: err.issues.map((i) => ({ field: i.path.join("."), message: i.message })),
     });
+    return;
   }
 
-  // 🟡 Error object
-  if (err instanceof Error) {
-    return res.status(500).json({
-      success: false,
-      message: err.message,
-    });
-  }
-
-  // 🔴 Error БИШ object орж ирсэн үед
-  return res.status(500).json({
-    success: false,
-    message: "Unknown server error",
-  });
+  // Бусад алдаа — 500 Internal Server Error
+  const message = err instanceof Error ? err.message : "Unknown server error";
+  console.error("🔥 SERVER ERROR:", err);
+  res.status(500).json({ success: false, message });
 };

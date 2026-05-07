@@ -68,7 +68,7 @@ export const VerifyEmail = () => {
         width: "70%",
       }}
     >
-      <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
+      <div className="w-104 h-fit flex flex-col gap-6 ">
         <Button
           onClick={() => setStep(2)}
           type="button"

@@ -74,7 +74,7 @@ export const AddNewCategoryButton = ({
           <Plus className="w-4 h-4 text-white" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full rounded-xl bg-white flex gap-6 flex-col [&>button]:hidden border border-red-600">
+      <DialogContent className="w-full rounded-xl bg-white flex gap-6 flex-col [&>button]:hidden border ">
         <DialogHeader className="relative">
           <DialogTitle className="text-[#09090B] font-semibold text-2xl mb-10">
             Add new category

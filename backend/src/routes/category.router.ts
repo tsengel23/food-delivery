@@ -4,30 +4,18 @@ import { getCategories } from "../controllers/category/get-categories.js";
 import { updateCategory } from "../controllers/category/update-category.js";
 import { deleteCategory } from "../controllers/category/delete-category.js";
 import { getCategory } from "../controllers/category/get-category.js";
+import { authenticate } from "../middlewares/auth.middleware.js";
+import { authorize } from "../middlewares/role.middleware.js";
 
 const CategoryRouter = Router();
 
-CategoryRouter.get("/", getCategories)
-  .post("/create", createCategory)
-  .delete("/:id", deleteCategory);
+// Нийтийн route-ууд
+CategoryRouter.get("/", getCategories);
+CategoryRouter.get("/:id", getCategory);
+
+// owner + manager удирдах боломжтой
+CategoryRouter.post("/create", authenticate, authorize("owner", "manager"), createCategory);
+CategoryRouter.put("/:id", authenticate, authorize("owner", "manager"), updateCategory);
+CategoryRouter.delete("/:id", authenticate, authorize("owner", "manager"), deleteCategory);
 
 export { CategoryRouter };
-
-// import { Router } from "express";
-// import {
-//   createCategory,
-//   getCategories,
-//   getCategory,
-//   updateCategory,
-//   deleteCategory,
-// } from "../controllers/category/index.js";
-
-// const router = Router();
-
-// router.post("/", createCategory);
-// router.get("/", getCategories);
-// router.get("/:id", getCategory);
-// router.put("/:id", updateCategory);
-// router.delete("/:id", deleteCategory);
-
-// export default router;

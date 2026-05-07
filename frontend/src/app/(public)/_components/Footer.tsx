@@ -1,7 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import { Flow } from "./Flow";
+import { useEffect, useState } from "react";
+import { api } from "@/lib/axios";
 
 export const Footer = () => {
+  const [categories, setCategories] = useState<category[]>([]);
+
+  useEffect(() => {
+    api.get<category[]>("/categories").then(({ data }) => setCategories(data));
+  }, []);
   return (
     <div className="w-full bg-[#18181B] flex flex-col   border-red-500">
       <div className="w-full py-7 pl-[98px] bg-[#EF4444] mt-15 whitespace-nowrap overflow-hidden animate-flow flex gap-[34]">
@@ -80,36 +89,11 @@ export const Footer = () => {
             menu
           </h1>
           <ul className="text-base font-normal text-white space-y-4 grid grid-cols-2">
-            <li>
-              <Link href="/menu">Appetizers</Link>
-            </li>
-            <li>
-              <Link href="/menu">Salads</Link>
-            </li>
-            <li>
-              <Link href="/menu">Pizzas</Link>
-            </li>
-            <li>
-              <Link href="/menu">Lunch favorites</Link>
-            </li>
-            <li>
-              <Link href="/menu">Main dishes</Link>
-            </li>
-            <li>
-              <Link href="/menu">Side dish </Link>
-            </li>
-            <li>
-              <Link href="/menu">Brunch</Link>
-            </li>
-            <li>
-              <Link href="/menu">Desserts</Link>
-            </li>
-            <li>
-              <Link href="/menu">Beverages</Link>
-            </li>
-            <li>
-              <Link href="/menu">Fish & Sea foods</Link>
-            </li>
+            {categories.map((cat) => (
+              <li key={cat._id}>
+                <Link href={`/#${cat._id}`}>{cat.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="flex flex-col justify-between h-20 pr-9">

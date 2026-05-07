@@ -4,7 +4,7 @@ type food = {
   price: number;
   image: string;
   ingredients: string;
-  categotyIds: category[];
+  categoryIds: category[];
 };
 
 // type categoryId = {
@@ -15,5 +15,20 @@ type food = {
 type category = {
   _id: string;
   name: string;
-  // foodCount: number;
+};
+
+type OrderItem = {
+  foodId: { _id: string; name: string; price: number; image: string };
+  quantity: number;
+  price: number;
+};
+
+type Order = {
+  _id: string;
+  userId: { _id: string; email: string };
+  orderItems: OrderItem[];
+  totalPrice: number;
+  status: "pending" | "paid" | "delivered" | "cancelled";
+  deliveryAddress: string;
+  createdAt: string;
 };

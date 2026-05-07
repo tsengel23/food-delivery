@@ -1,13 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Truck, Utensils } from "lucide-react";
+import { Truck, Utensils, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AdminAvatar } from "./AdminAvatar";
+import { useAuth } from "@/app/context/AuthProvider";
 
 const AdminNavbar = () => {
   const pathname = usePathname();
+  const { user } = useAuth();
   return (
     <div className="h-full w-fit border-green-500">
       <Link href="/">
@@ -38,7 +40,19 @@ const AdminNavbar = () => {
             </div>
           </Button>
         </Link>
-        {/*  */}
+        {/* Зөвхөн owner-д харагдана */}
+        {user?.role === "owner" && (
+          <Link href="/admin/users">
+            <Button
+              variant={pathname === "/admin/users" ? "default" : "outline"}
+              className="rounded-full w-[165]"
+            >
+              <div className="flex gap-2 ">
+                <Users /> Users
+              </div>
+            </Button>
+          </Link>
+        )}
 
         {/* <Button
           variant={"outline"}

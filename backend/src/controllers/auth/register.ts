@@ -1,26 +1,24 @@
 import type { RequestHandler } from "express";
+import bcrypt from "bcryptjs";
 import { UserModel } from "../../database/schema/user.schema.js";
-import jwt from "jsonwebtoken";
 
-export const register: RequestHandler = async (req, res) => {
-  const { password, email } = req.body;
-  // const { username, password, email } = req.body;
+// Шинэ хэрэглэгч бүртгэнэ — нууц үгийг bcrypt-ээр hash хийж хадгална
+export const register: RequestHandler = async (req, res, next) => {
+  try {
+    const { email, password } = req.body as { email: string; password: string };
 
-  // const isUsernameExist = await UserModel.findOne({ username });
-  // if (isUsernameExist)
-  //   return res.status(400).json({ message: "Username already exist" });
+    const existing = await UserModel.findOne({ email });
+    if (existing) {
+      res.status(409).json({ success: false, message: "Email already in use" });
+      return;
+    }
 
-  const isEmailExist = await UserModel.findOne({ email });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await UserModel.create({ email, password: hashedPassword });
+    const { password: _, ...safeUser } = user.toObject();
 
-  console.log(isEmailExist);
-
-  if (isEmailExist)
-    return res.status(400).json({ message: "Email already exist" });
-
-  const user = await UserModel.create({
-    // username,
-    password,
-    email,
-  });
-  res.status(200).json({ user });
+    res.status(201).json({ success: true, data: safeUser });
+  } catch (err) {
+    next(err);
+  }
 };

@@ -16,6 +16,7 @@ import { toast } from "sonner";
 type AuthContextType = {
   user: User | null;
   login: (username: string, password: string) => Promise<void>;
+  logout: () => void;
   register: (
     // username: string,
     email: string,
@@ -35,9 +36,8 @@ type AuthContextType = {
 
 type User = {
   _id: string;
-  name: string;
   email: string;
-  role: string;
+  role: "owner" | "manager" | "customer";
 };
 
 type LoginResponse = {
@@ -66,10 +66,18 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       localStorage.setItem("accessToken", accessToken);
 
       setUser(user);
-      router.push("/");
+      // owner/manager → admin dashboard, customer → нүүр хуудас
+      const isStaff = ["owner", "manager"].includes(user.role);
+      router.push(isStaff ? "/admin" : "/");
     } catch (error) {
       toast.error("Invalid username or password");
     }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    setUser(null);
+    router.push("/");
   };
 
   const register = async (
@@ -111,7 +119,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, login, register, setNewUser, newUser }}
+      value={{ user, login, logout, register, setNewUser, newUser }}
     >
       {children}
     </AuthContext.Provider>

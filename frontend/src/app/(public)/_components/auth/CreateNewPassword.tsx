@@ -86,7 +86,7 @@ export const CreateNewPassword = () => {
         width: "70%",
       }}
     >
-      <div className="w-104 h-fit flex flex-col gap-6  border-red-500">
+      <div className="w-104 h-fit flex flex-col gap-6 ">
         <Button
           onClick={() => setStep(3)}
           type="button"

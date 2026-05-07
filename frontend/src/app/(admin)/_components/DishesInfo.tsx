@@ -10,23 +10,18 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ImageIcon, Pencil, Trash, X } from "lucide-react";
-
+import { Pencil, Trash, Upload, X } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -35,64 +30,130 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { assert } from "console";
+import { useEffect, useRef, useState } from "react";
 import { api } from "@/lib/axios";
+import { toast } from "sonner";
 
 const formSchema = z.object({
-  dishesName: z.string(),
-  dishCategory: z.string(),
-  ingredients: z.string(),
-  price: z.string(),
-  image: z.instanceof(File).optional(),
+  name: z.string().min(2, "Food name must be at least 2 characters"),
+  categoryId: z.string().min(1, "Please select a category"),
+  ingredients: z.string().min(5, "Ingredients must be at least 5 characters"),
+  price: z.string().refine(
+    (val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0,
+    { message: "Price must be a valid positive number" },
+  ),
+  image: z.string().min(1, "Image is required"),
 });
 
-// type category = {
-//   _id: string;
-//   name: string;
-// };
+type FormValues = z.infer<typeof formSchema>;
 
-export const DishesInfo = () => {
+type DishesInfoProps = {
+  food: food;
+  onUpdated: (updated: food) => void;
+  onDeleted: (id: string) => void;
+};
+
+export const DishesInfo = ({ food, onUpdated, onDeleted }: DishesInfoProps) => {
+  const [open, setOpen] = useState(false);
   const [categories, setCategories] = useState<category[]>([]);
-  const form = useForm<z.infer<typeof formSchema>>({
+  const [isUploading, setIsUploading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState(food.image);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // categoryIds нь populate хийгдсэн объект массив байдаг
+  const firstCategoryId = (food.categoryIds as category[])?.[0]?._id ?? "";
+
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      dishesName: "",
-      dishCategory: "",
-      ingredients: "",
-      price: "",
-      image: undefined,
+      name: food.name,
+      categoryId: firstCategoryId,
+      ingredients: food.ingredients,
+      price: String(food.price),
+      image: food.image,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
-
-  //
+  // Dialog нээхэд categories татаж, формыг одоогийн өгөгдлөөр дүүргэнэ
   useEffect(() => {
-    const fetchCategories = async () => {
-      const { data } = await api.get<category[]>("/categories");
-      setCategories(data);
-    };
-    fetchCategories();
-  }, []);
-  //
+    if (!open) return;
+
+    api.get<category[]>("/categories").then(({ data }) => setCategories(data));
+
+    const catId = (food.categoryIds as category[])?.[0]?._id ?? "";
+    form.reset({
+      name: food.name,
+      categoryId: catId,
+      ingredients: food.ingredients,
+      price: String(food.price),
+      image: food.image,
+    });
+    setPreviewUrl(food.image);
+  }, [open]);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    try {
+      const res = await fetch(
+        `/api/upload?filename=${encodeURIComponent(file.name)}`,
+        { method: "POST", body: file },
+      );
+      const blob = await res.json();
+      setPreviewUrl(blob.url);
+      form.setValue("image", blob.url);
+    } catch {
+      toast.error("Image upload failed");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const onSubmit = async (values: FormValues) => {
+    try {
+      const { data: updated } = await api.put<food>(`/foods/${food._id}`, {
+        name: values.name,
+        price: parseFloat(values.price),
+        ingredients: values.ingredients,
+        image: values.image,
+        categoryIds: [values.categoryId],
+      });
+      onUpdated(updated);
+      toast.success("Dish updated");
+      setOpen(false);
+    } catch {
+      toast.error("Failed to update dish");
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!confirm(`"${food.name}" хоолыг устгах уу?`)) return;
+    try {
+      await api.delete(`/foods/${food._id}`);
+      onDeleted(food._id);
+      toast.success("Dish deleted");
+      setOpen(false);
+    } catch {
+      toast.error("Failed to delete dish");
+    }
+  };
+
   return (
-    <Dialog>
-      <div className="flex flex-col gap-6 items-center">
-        <DialogTrigger asChild>
-          <Button
-            type="button"
-            variant={"secondary"}
-            className="w-9 h-9 bg-white flex justify-center items-center rounded-full border"
-          >
-            <Pencil className="w-4 h-4 text-[#EF4444]" strokeWidth={2} />
-          </Button>
-        </DialogTrigger>
-      </div>
-      <DialogContent className="[&>button]:hidden ">
-        <DialogHeader className=" w-full relative">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button
+          type="button"
+          variant="secondary"
+          className="w-9 h-9 bg-white flex justify-center items-center rounded-full border"
+        >
+          <Pencil className="w-4 h-4 text-[#EF4444]" strokeWidth={2} />
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="[&>button]:hidden">
+        <DialogHeader className="w-full relative">
           <DialogTitle className="text-[#09090B] font-semibold text-xl mb-5">
             Dishes info
           </DialogTitle>
@@ -102,77 +163,62 @@ export const DishesInfo = () => {
             </button>
           </DialogClose>
         </DialogHeader>
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className=" border border-red-500"
+            className=" border-red-500"
           >
             <div className="flex flex-col items-end relative border-blue-500">
               <FormField
                 control={form.control}
-                name="dishesName"
+                name="name"
                 render={({ field }) => (
                   <FormItem className="mb-6">
-                    <FormLabel className=" w-full absolute left-0">
+                    <FormLabel className="w-full absolute left-0">
                       Dish name
                     </FormLabel>
                     <FormControl className="w-[288px]">
                       <Input placeholder="Name here..." {...field} />
                     </FormControl>
-                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
-                name="dishCategory"
+                name="categoryId"
                 render={({ field }) => (
                   <FormItem className="mb-6">
-                    <FormLabel className=" w-full absolute left-0">
+                    <FormLabel className="w-full absolute left-0">
                       Dish category
                     </FormLabel>
-                    <FormControl>
-                      {/* <Input placeholder="Category here..." {...field} /> */}
-                      <Select
-                        {...field}
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
                         <SelectTrigger className="w-[288px]">
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
-                        <SelectContent>
-                          {categories.map((category) => {
-                            return (
-                              <SelectItem
-                                key={category._id}
-                                value={category._id}
-                              >
-                                {category.name}
-                              </SelectItem>
-                            );
-                          })}
-                          {/* <SelectItem value="appetizer">Appetizers</SelectItem>
-                          <SelectItem value="pizzas">Pizzas</SelectItem>
-                          <SelectItem value="salads">Salads</SelectItem>
-                          <SelectItem value="main dishs">
-                            Main dishes
-                          </SelectItem> */}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormDescription></FormDescription>
+                      </FormControl>
+                      <SelectContent>
+                        {categories.map((cat) => (
+                          <SelectItem key={cat._id} value={cat._id}>
+                            {cat.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="ingredients"
                 render={({ field }) => (
                   <FormItem className="mb-6">
-                    <FormLabel className=" w-full absolute left-0">
+                    <FormLabel className="w-full absolute left-0">
                       Ingredients
                     </FormLabel>
                     <FormControl>
@@ -182,17 +228,17 @@ export const DishesInfo = () => {
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="price"
                 render={({ field }) => (
                   <FormItem className="mb-6">
-                    <FormLabel className=" w-full absolute left-0">
+                    <FormLabel className="w-full absolute left-0">
                       Price
                     </FormLabel>
                     <FormControl className="w-[288px]">
@@ -204,73 +250,82 @@ export const DishesInfo = () => {
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="image"
-                render={({ field }) => (
+                render={() => (
                   <FormItem className="mb-6">
-                    <FormLabel className=" w-full absolute left-0">
+                    <FormLabel className="w-full absolute left-0">
                       Image
                     </FormLabel>
                     <FormControl>
-                      <div className="relative">
-                        <Input
+                      <div className="w-[288px]">
+                        <input
+                          ref={fileInputRef}
                           type="file"
-                          placeholder="Image file"
-                          className="absolute w-full h-full top-0 left-0 opacity-0 z-10 cursor-pointer"
-                          onChange={(e) => {
-                            const files = e.target.files;
-                            if (!files) return;
-                            const [file] = files;
-                            field.onChange(file);
-                          }}
+                          accept="image/*"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                          id="edit-file-upload"
                         />
-                        {field.value && (
-                          <div className="absolute w-full h-full top-0 left-0 rounded-xl overflow-hidden">
+                        {previewUrl ? (
+                          <div className="relative border-2 border-gray-300 rounded-lg overflow-hidden">
                             <Image
-                              src={URL.createObjectURL(field.value)}
-                              alt="image"
-                              fill
-                              className="object-cover"
+                              src={previewUrl}
+                              alt="Food image"
+                              width={288}
+                              height={116}
+                              className="w-full h-[116px] object-cover"
                             />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setPreviewUrl("");
+                                form.setValue("image", "");
+                                if (fileInputRef.current)
+                                  fileInputRef.current.value = "";
+                              }}
+                              className="absolute top-2 right-2 w-7 h-7 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
                           </div>
-                        )}
-                        <div className="  aspect-[288/116] h-[116px] rounded-xl border border-dashed border-[#2563EB33] flex justify-center items-center bg-[#2563EB0D]">
-                          <div className="flex flex-col items-center gap-2">
-                            <div className="w-9 h-9 rounded-full  border flex justify-center items-center bg-white">
-                              <ImageIcon className=" w-4 h-4 text-black" />
-                            </div>
-                            <p className="font-normal text-sm">
-                              Choose a file or drag & drop it here
+                        ) : (
+                          <label
+                            htmlFor="edit-file-upload"
+                            className="h-[116px] rounded-xl border border-dashed border-[#2563EB33] flex flex-col justify-center items-center bg-[#2563EB0D] cursor-pointer gap-2"
+                          >
+                            <Upload className="w-6 h-6 text-gray-400" />
+                            <p className="text-sm text-gray-600">
+                              {isUploading
+                                ? "Uploading..."
+                                : "Choose a file or drag & drop it here"}
                             </p>
-                          </div>
-                        </div>
+                          </label>
+                        )}
                       </div>
                     </FormControl>
-                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-            <div className=" flex justify-between">
+
+            <div className="flex justify-between">
               <Button
-                onClick={() => {
-                  form.reset();
-                  console.clear();
-                }}
                 type="button"
-                variant={"outline"}
+                variant="outline"
                 className="w-9 h-9 border border-red-600"
+                onClick={handleDelete}
               >
                 <Trash className="w-4 h-4 text-red-600" />
               </Button>
-              <Button variant={"default"} type="submit">
+              <Button variant="default" type="submit" disabled={isUploading}>
                 Save changes
               </Button>
             </div>

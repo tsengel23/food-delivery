@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-screen min-h-screen flex flex-col items-center bg-[#404040] border border-red-500">
+    <div className="w-screen min-h-screen flex flex-col items-center bg-[#404040] ">
       <div className="mb-22 mt-17">
         <img src="/hero.png" />
       </div>

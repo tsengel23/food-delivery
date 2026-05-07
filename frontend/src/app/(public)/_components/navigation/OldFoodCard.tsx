@@ -33,7 +33,7 @@ export const FoodCard = ({ image, title, overview, price }: FoodCard) => {
     <div className="relative">
       <Dialog>
         <DialogTrigger asChild>
-          <div className="flex flex-col gap-5 p-4 rounded-2xl bg-white border border-red-500">
+          <div className="flex flex-col gap-5 p-4 rounded-2xl bg-white ">
             <div className="border border-green-500 rounded-xl relative aspect-[365/210] w-full overflow-hidden">
               <img
                 className="absolute inset-0 w-full h-full object-cover rounded-xl"

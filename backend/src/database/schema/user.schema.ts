@@ -1,19 +1,19 @@
-import { timeStamp } from "node:console";
 import { Schema, model } from "mongoose";
-import { string } from "zod";
-import { required } from "zod/mini";
 
 const userSchema = new Schema(
   {
-    // username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     profileImage: { type: String, required: false },
     address: { type: String, required: false },
-    role: { type: String, required: true, default: "customer" },
+    // owner: бүх эрх | manager: хоол+захиалга | customer: зөвхөн захиалга
+    role: {
+      type: String,
+      enum: ["owner", "manager", "customer"],
+      default: "customer",
+    },
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true }
 );
+
 export const UserModel = model("User", userSchema);

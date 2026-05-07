@@ -53,12 +53,14 @@ type FoodMenuSectionProps = {
   categoryId: string;
   title: string;
   onFoodCreated: () => void;
+  onFoodDeleted?: () => void;
 };
 
 export const FoodMenuSection = ({
   categoryId,
   title,
   onFoodCreated,
+  onFoodDeleted,
 }: FoodMenuSectionProps) => {
   const [foods, setFoods] = useState<food[]>([]);
   const [loading, setLoading] = useState(false);
@@ -96,17 +98,21 @@ export const FoodMenuSection = ({
         {loading && <p>Loading ...</p>}
 
         {!loading &&
-          foods.map((item) => {
-            return (
-              <FoodMenuCard
-                key={item._id}
-                image={item.image}
-                name={item.name}
-                price={item.price}
-                ingredients={item.ingredients}
-              />
-            );
-          })}
+          foods.map((item) => (
+            <FoodMenuCard
+              key={item._id}
+              food={item}
+              onUpdated={(updated) =>
+                setFoods((prev) =>
+                  prev.map((f) => (f._id === updated._id ? updated : f)),
+                )
+              }
+              onDeleted={(id) => {
+                setFoods((prev) => prev.filter((f) => f._id !== id));
+                onFoodDeleted?.();
+              }}
+            />
+          ))}
       </div>
     </div>
   );

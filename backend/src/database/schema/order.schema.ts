@@ -6,15 +6,19 @@ const orderSchema = new Schema(
     orderItems: [
       {
         foodId: { type: Schema.Types.ObjectId, ref: "Food", required: true },
-        quantity: { type: Number, required: true },
-        price: { type: Number, required: true },
+        quantity: { type: Number, required: true, min: 1 },
+        price: { type: Number, required: true }, // тухайн үеийн хоолны үнэ
       },
     ],
-    status: { type: String, required: true, default: "pending" },
-    // totalPrice: { type: Number, required: true }, //<--------uuniig sain oilgoogui ee bodsnoo haruulj bolno gesniig [11:58] deer bagsh helsen
+    totalPrice: { type: Number, required: true },
+    deliveryAddress: { type: String, required: true },
+    status: {
+      type: String,
+      enum: ["pending", "paid", "delivered", "cancelled"],
+      default: "pending",
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
+
 export const OrderModel = model("Order", orderSchema);

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,12 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthProvider";
 
 export const UserStatus = () => {
-  //
-  const router = useRouter();
-  //
+  const { user, logout } = useAuth();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,20 +27,18 @@ export const UserStatus = () => {
           </Button>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex flex-col items-center ">
+      <DropdownMenuContent className="flex flex-col items-center">
         <DropdownMenuLabel className="mx-4 mt-4">
-          <span className="text-[#09090B] font-semibold text-2xl">
-            Test@gmail.com
+          <span className="text-[#09090B] font-semibold text-xl">
+            {user?.email}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="border w-fit h-hit p-0 rounded-full my-3">
+        <DropdownMenuItem className="border w-fit p-0 rounded-full my-3">
           <Button
-            onClick={() => {
-              router.replace("/");
-            }}
+            onClick={logout}
             variant={"outline"}
-            className=" rounded-full overflow-hidden border border-red-200"
+            className="rounded-full border border-red-200"
           >
             Sign out
           </Button>

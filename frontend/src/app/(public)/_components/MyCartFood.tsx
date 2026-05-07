@@ -18,15 +18,15 @@ export const MyCartFood = ({
   // const [count, setCount] = useState(1);
   return (
     <div>
-      <div className=" flex gap-[10px] border-3 border-blue-400 relative">
-        <div className="rounded-xl border border-red-500 relative overflow-hidden flex-shrink-0 w-32 h-32">
+      <div className=" flex gap-[10px]  relative">
+        <div className="rounded-xl relative overflow-hidden flex-shrink-0 w-32 h-32">
           <img
             src={item.image ?? "/food2.png"}
             //   src="/food2.png"
             className="absolute w-full h-full inset-0 top-0 left-0 object-cover"
           />
         </div>
-        <div className="w-full flex flex-col gap-6 border border-red-400">
+        <div className="w-full flex flex-col gap-6 border border-gray-50">
           <div className="flex flex-col gap-2">
             <h1 className="text-[#EF4444] text-base font-bold">
               {item.name}
@@ -38,7 +38,7 @@ export const MyCartFood = ({
             sugar. */}
             </p>
           </div>
-          <div className="flex justify-between border border-green-500 items-center">
+          <div className="flex justify-between  items-center">
             <div className="flex items-center gap-2">
               <Button
                 className="p-0"
